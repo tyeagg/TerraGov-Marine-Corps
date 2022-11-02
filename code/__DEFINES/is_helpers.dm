@@ -44,6 +44,7 @@
 #define ishuman(A) (istype(A, /mob/living/carbon/human))
 
 //Human sub-species
+#define isaugmented(H) (is_species(H, /datum/species/augmented))
 #define isrobot(H) (is_species(H, /datum/species/robot))
 #define issynth(H) (is_species(H, /datum/species/synthetic) || is_species(H, /datum/species/early_synthetic))
 #define isspeciessynthetic(H) (H.species.species_flags & IS_SYNTHETIC)

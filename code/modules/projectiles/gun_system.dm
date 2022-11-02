@@ -342,9 +342,9 @@
 	///Amount of heat per shot.
 	var/heat_amount = 5
 	///Amount of cooling per tick.
-	var/cool_amount = 2
+	var/cool_amount = 5
 	///Amount of time the gun is unable to fire after it has overheated.
-	var/cooldown_time = 5 SECONDS
+	var/cooldown_time = 3 SECONDS
 	///If the gun is overheated.
 	var/overheated = FALSE
 	///Stores the timer for overheat.

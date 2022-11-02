@@ -1280,4 +1280,3 @@
 	akimbo_additional_delay = 0.9
 	windup_delay = 0.5 SECONDS
 	use_heat = TRUE
-	cool_amount = 5

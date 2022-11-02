@@ -50,6 +50,6 @@
 	volume = 40
 
 /datum/looping_sound/chainsaw
-	mid_sounds = list('sound/machines/grill/grillsizzle.ogg' = 1)
-	mid_length = 18
-	volume = 50
+	mid_sounds = list('sound/weapons/chainsword_loop.ogg' = 1)
+	mid_length = 0.9 SECONDS
+	volume = 100

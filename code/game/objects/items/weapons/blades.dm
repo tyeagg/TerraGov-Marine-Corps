@@ -359,12 +359,15 @@
 
 /obj/item/weapon/chainsword
 	name = "chainsword"
-	desc = "chainsword thing"
+	desc = "The chainsword is essentially a sword with powered teeth that run along a single-edged blade like that of a chainsaw. Most versions of the weapon make use of monomolecularly-edged or otherwise razor-sharp teeth.Chainswords are not subtle weapons, and wielding one is a statement in its own right they are horrific tools of war, designed to bite, tear and eviscerate where more primitive blades merely cut and slice."
 	icon = 'icons/obj/items/weapons.dmi'
 	icon_state = "chainswordoff"
 	attack_verb = list("gored", "slashed", "cut")
 	force = 10
 	throwforce = 5
+	hitsound = 'sound/weapons/chainsawhit.ogg'
+	hitvolume = 100
+	w_class = WEIGHT_CLASS_NORMAL
 	var/on = FALSE
 	var/datum/looping_sound/chainsaw/chainsaw_loop
 
@@ -373,25 +376,29 @@
 	. = ..()
 	chainsaw_loop = new(null, FALSE)
 
+/obj/item/weapon/chainsword/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+	. = ..()
+	if(!on)
+		user.balloon_alert(user, "Turn on your chainsword!")
+
 /obj/item/weapon/chainsword/attack_self(mob/user)
 	. = ..()
 	if(!on)
 		on = !on
+		w_class = WEIGHT_CLASS_BULKY
 		icon_state = "chainswordon"
-		force = 40
-		attack_speed = 5
+		force = 75
+		attack_speed = 10
 		throwforce = 30
 		chainsaw_loop.start(src)
+		playsound(loc, 'sound/weapons/chainsword_start.ogg', 100, 1)
 	else
 		on = !on
+		w_class = WEIGHT_CLASS_NORMAL
 		icon_state = initial(icon_state)
 		force = initial(force)
 		throwforce = initial(icon_state)
 		chainsaw_loop.stop()
-
-/obj/item/weapon/chainsword/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	playsound(loc, 'sound/weapons/chainsawhit.ogg', 100, 1)
-	return ..()
 
 /obj/item/weapon/chainsword/suicide_act(mob/user)
 	user.visible_message(span_danger("[user] is falling on the [src.name]! It looks like [user.p_theyre()] trying to commit suicide."))

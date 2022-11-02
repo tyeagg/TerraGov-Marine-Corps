@@ -36,6 +36,7 @@ GLOBAL_DATUM_INIT(welding_sparks_prepdoor, /mutable_appearance, mutable_appearan
 	var/heat = 0 //whether this item is a source of heat, and how hot it is (in Kelvin).
 
 	var/hitsound = null
+	var/hitvolume = 25
 	var/w_class = WEIGHT_CLASS_NORMAL
 	var/flags_item = NONE	//flags for item stuff that isn't clothing/equipping specific.
 	var/flags_equip_slot = NONE		//This is used to determine on which slots an item can fit.

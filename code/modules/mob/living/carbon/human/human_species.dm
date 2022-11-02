@@ -54,3 +54,6 @@
 
 /mob/living/carbon/human/species/robot
 	race = "Combat Robot"
+
+/mob/living/carbon/human/species/augmented
+	race = "Augmented"

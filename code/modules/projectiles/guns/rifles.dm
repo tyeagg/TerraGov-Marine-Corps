@@ -1846,9 +1846,9 @@
 	unload_sound = 'sound/weapons/guns/interact/t18_unload.ogg'
 	reload_sound = 'sound/weapons/guns/interact/t18_reload.ogg'
 	caliber = CALIBER_10X24_CASELESS
-	max_shells = 50
-	default_ammo_type = /obj/item/ammo_magazine/rifle/autogun
-	allowed_ammo_types = list(/obj/item/ammo_magazine/rifle/autogun)
+	max_shells = 12
+	default_ammo_type = /obj/item/ammo_magazine/rifle/galvanic
+	allowed_ammo_types = list(/obj/item/ammo_magazine/rifle/galvanic)
 	attachable_allowed = list(
 		/obj/item/attachable/reddot,
 		/obj/item/attachable/verticalgrip,

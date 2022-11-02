@@ -491,7 +491,6 @@
 	use_heat = TRUE
 	heat_amount = 1
 	max_heat = 50
-	cool_amount = 5
 
 /turf/proc/ignite(fire_lvl, burn_lvl, f_color, fire_stacks = 0, fire_damage = 0)
 	//extinguish any flame present

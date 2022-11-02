@@ -247,6 +247,9 @@ You are also in charge of communicating with command and letting them know about
 	. = ..()
 	to_chat(M, {"\nYou are a tech priest of the mechanicus. With your experienced knowledge of machinery, your job is to provide engineering support to your team while also leading your skitarii units."})
 
+/datum/job/imperial/tech_priest/return_spawn_type()
+	return /mob/living/carbon/human/species/augmented
+
 /datum/outfit/job/imperium/tech_priest
 	name = "Mechanicus Tech Priest"
 	jobtype = /datum/job/imperial/tech_priest
@@ -276,6 +279,10 @@ You are also in charge of communicating with command and letting them know about
 /datum/job/imperial/skitarii/radio_help_message(mob/M)
 	. = ..()
 	to_chat(M, {"\nYou are the a Veteran among the Guardsman. With your shockingly long experience (and better training and equipment), your job is to provide special weapons support to bolster the line."})
+
+
+/datum/job/imperial/skitarii/return_spawn_type()
+	return /mob/living/carbon/human/species/augmented
 
 /datum/outfit/job/imperium/skitarii
 	name = "Mechanicus Skitarii"
