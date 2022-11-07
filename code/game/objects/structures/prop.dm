@@ -305,14 +305,47 @@
 	icon_state = "secure_wide_right_locked"
 
 /obj/structure/prop/mainship/telecomms
-	name = "\improper Command Airlock"
+	name = "subspace broadcaster"
+	desc = "A mighty piece of hardware used to broadcast processed subspace signals."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "broadcaster_send"
 
+/obj/structure/prop/mainship/telecomms/hub
+	name = "subspace broadcaster"
+	desc = "A mighty piece of hardware used to send/receive massive amounts of data."
+	icon = 'icons/obj/machines/telecomms.dmi'
+	icon_state = "hub"
+
+/obj/structure/prop/mainship/telecomms/processor
+	name = "processor unit"
+	desc = "This machine is used to process large quantities of information."
+	icon = 'icons/obj/machines/telecomms.dmi'
+	icon_state = "processor"
+
 /obj/structure/prop/mainship/telecomms/bus
-	name = "\improper Command Airlock"
-	icon = 'icons/obj/stationobjs.dmi'
+	name = "bus mainframe"
+	desc = "A mighty piece of hardware used to send massive amounts of data quickly."
+	icon = 'icons/obj/machines/telecomms.dmi'
 	icon_state = "bus"
+
+/obj/structure/prop/mainship/telecomms/broadcaster
+	name = "subspace broadcaster"
+	desc = "This machine has a dish-like shape and green lights. It is designed to detect and process subspace radio activity."
+	icon = 'icons/obj/machines/telecomms.dmi'
+	icon_state = "broadcaster"
+
+/obj/structure/prop/mainship/telecomms/receiver
+	name = "subspace receiver"
+	desc = "A dish-shaped machine used to broadcast processed subspace signals."
+	icon = 'icons/obj/machines/telecomms.dmi'
+	icon_state = "broadcast receiver"
+
+/obj/structure/prop/mainship/telecomms/relay
+	name = "telecomms relay"
+	desc = "A mighty piece of hardware used to send massive amounts of data far away."
+	icon = 'icons/obj/machines/telecomms.dmi'
+	icon_state = "relay"
+
 
 /obj/structure/prop/mainship/suit_storage_prop
 	name = "Suit Storage Unit"
@@ -511,6 +544,61 @@
 	icon_state =  "pump_on"
 	layer = GAS_PUMP_LAYER
 
+/obj/structure/prop/mainship/halfbuilt_mech
+	name = "half-assembled mech"
+	desc = "A half-assembled mech. It's missing limbs and the maintenance ports are open. You probably shouldn't screw with it."
+	icon_state = ""
+	pixel_x = -16
+	/// selected parts you want displayed. remove parts if you dont want them
+	var/selected_parts = list(
+		MECH_GREY_TORSO = MECH_ASSAULT,
+		MECH_GREY_LEGS = MECH_ASSAULT,
+		MECH_GREY_L_ARM = MECH_ASSAULT,
+	)
+
+/obj/structure/prop/mainship/halfbuilt_mech/Initialize()
+	. = ..()
+	var/default_colors = MECH_GREY_PRIMARY_DEFAULT + MECH_GREY_SECONDARY_DEFAULT
+	var/default_visor = MECH_GREY_VISOR_DEFAULT
+	var/new_overlays = list()
+	for(var/slot in selected_parts)
+		var/datum/mech_limb/head/typepath = get_mech_limb(slot, selected_parts[slot])
+		if(slot == MECH_GREY_L_ARM || slot == MECH_GREY_R_ARM)
+			var/iconstate = "left"
+			if(slot == MECH_GREY_R_ARM)
+				iconstate = "right"
+			new_overlays += iconstate2appearance(SSgreyscale.GetColoredIconByType(initial(typepath.greyscale_type), default_colors), iconstate)
+			continue
+		new_overlays += icon2appearance(SSgreyscale.GetColoredIconByType(initial(typepath.greyscale_type), default_colors))
+		if(slot == MECH_GREY_HEAD)
+			new_overlays += icon2appearance(SSgreyscale.GetColoredIconByType(initial(typepath.visor_config), default_visor))
+	overlays = new_overlays
+
+/obj/structure/prop/mainship/halfbuilt_mech/legs
+	desc = "Leg."
+	selected_parts = list(
+		MECH_GREY_LEGS = MECH_RECON,
+	)
+
+/obj/structure/prop/mainship/halfbuilt_mech/vanguard
+	selected_parts = list(
+		MECH_GREY_TORSO = MECH_VANGUARD,
+		MECH_GREY_HEAD = MECH_VANGUARD,
+		MECH_GREY_LEGS = MECH_VANGUARD,
+		MECH_GREY_L_ARM = MECH_VANGUARD,
+	)
+
+/obj/structure/prop/mainship/halfbuilt_mech/vanguard_finished
+	name = "Vanguard mech"
+	desc = "An advanced vanguard chassis mech. It's a recent advancement in military hardware only been in service for a short time and not in mass production yet."
+	selected_parts = list(
+		MECH_GREY_TORSO = MECH_VANGUARD,
+		MECH_GREY_HEAD = MECH_VANGUARD,
+		MECH_GREY_LEGS = MECH_VANGUARD,
+		MECH_GREY_L_ARM = MECH_VANGUARD,
+		MECH_GREY_R_ARM = MECH_VANGUARD,
+	)
+
 /obj/structure/prop/mainship/printer
 	name = "printer"
 	desc = "Machine for printing text or pictures onto paper."
@@ -693,6 +781,10 @@
 	resistance_flags = RESIST_ALL
 	layer = ABOVE_MOB_LAYER
 
+/obj/structure/prop/vehicle/van/destructible
+	max_integrity = 200
+	resistance_flags = XENO_DAMAGEABLE
+
 /obj/structure/prop/vehicle/truck
 	name = "truck"
 	desc = "An old truck, seems to be broken down."
@@ -705,9 +797,16 @@
 	resistance_flags = RESIST_ALL
 	layer = ABOVE_MOB_LAYER
 
+/obj/structure/prop/vehicle/truck/destructible
+	max_integrity = 150
+	resistance_flags = XENO_DAMAGEABLE
+
 /obj/structure/prop/vehicle/truck/truckcargo
 	icon_state = "truck_cargo"
 
+/obj/structure/prop/vehicle/truck/truckcargo/destructible
+	max_integrity = 200
+	resistance_flags = XENO_DAMAGEABLE
 /obj/structure/prop/vehicle/crane
 	name = "crane"
 	desc = "An old crane, seems to be broken down."
@@ -720,8 +819,16 @@
 	resistance_flags = RESIST_ALL
 	layer = ABOVE_MOB_LAYER
 
+/obj/structure/prop/vehicle/crane/destructible
+	max_integrity = 300
+	resistance_flags = XENO_DAMAGEABLE
+
 /obj/structure/prop/vehicle/crane/cranecargo
 	icon_state = "crane_cargo"
+
+/obj/structure/prop/vehicle/crane/cranecargo/destructible
+	max_integrity = 300
+	resistance_flags = XENO_DAMAGEABLE
 
 /obj/structure/prop/vehicle/crawler
 	name = "crawler"
@@ -734,6 +841,11 @@
 	bound_width = 64
 	resistance_flags = RESIST_ALL
 	layer = ABOVE_MOB_LAYER
+
+/obj/structure/prop/vehicle/crawler/destructible
+	max_integrity = 200
+	resistance_flags = XENO_DAMAGEABLE
+
 
 /obj/structure/prop/vehicle/crawler/crawler_blue
 	icon_state = "crawler_crate_b"

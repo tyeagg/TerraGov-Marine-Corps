@@ -51,7 +51,7 @@
 	var/datum/action/innate/order/current_order
 	/// If it is currently controlling an object
 	var/controlling = FALSE
-	
+
 	///Linked artillery for remote targeting.
 	var/obj/machinery/deployable/mortar/linked_artillery
 
@@ -85,9 +85,9 @@
 
 	RegisterSignal(src, COMSIG_MOB_CLICK_ALT, .proc/send_order)
 	RegisterSignal(src, COMSIG_ORDER_SELECTED, .proc/set_order)
+
 	RegisterSignal(SSdcs, COMSIG_GLOB_OB_LASER_CREATED, .proc/receive_laser_ob)
 	RegisterSignal(SSdcs, COMSIG_GLOB_CAS_LASER_CREATED, .proc/receive_laser_cas)
-
 	RegisterSignal(SSdcs, COMSIG_GLOB_SHUTTLE_TAKEOFF, .proc/shuttle_takeoff_notification)
 
 	var/datum/action/innate/order/attack_order/send_attack_order = new
@@ -115,8 +115,10 @@
 	QDEL_NULL(track)
 	UnregisterSignal(src, COMSIG_ORDER_SELECTED)
 	UnregisterSignal(src, COMSIG_MOB_CLICK_ALT)
+
 	UnregisterSignal(SSdcs, COMSIG_GLOB_OB_LASER_CREATED)
 	UnregisterSignal(SSdcs, COMSIG_GLOB_CAS_LASER_CREATED)
+	UnregisterSignal(SSdcs, COMSIG_GLOB_SHUTTLE_TAKEOFF)
 	return ..()
 
 ///Print order visual to all marines squad hud and give them an arrow to follow the waypoint
@@ -356,8 +358,11 @@
 
 		stat("Current supply points:", "[round(SSpoints.supply_points[FACTION_TERRAGOV])]")
 
+		stat("Current dropship points:", "[round(SSpoints.dropship_points)]")
+
 		stat("Current alert level:", "[GLOB.marine_main_ship.get_security_level()]")
 
+		stat("Number of living marines:", "[SSticker.mode.count_humans_and_xenos()[1]]")
 
 
 /mob/living/silicon/ai/fully_replace_character_name(oldname, newname)
@@ -463,7 +468,9 @@
 /datum/action/innate/squad_message
 	name = "Send Order"
 	action_icon_state = "screen_order_marine"
-	keybind_signal = COMSIG_KB_SENDORDER
+	keybinding_signals = list(
+		KEYBINDING_NORMAL = COMSIG_KB_SENDORDER,
+	)
 
 /datum/action/innate/squad_message/can_use_action()
 	. = ..()

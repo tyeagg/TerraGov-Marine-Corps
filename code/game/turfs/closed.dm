@@ -394,6 +394,11 @@
 /turf/closed/shuttle/dropship2/transparent
 	opacity = FALSE
 
+/turf/closed/shuttle/tadpole
+	name = "\improper Tadpole"
+	icon = 'icons/turf/dropship2.dmi'
+	icon_state = "1"
+	plane = GAME_PLANE
 
 /turf/closed/shuttle/escapepod
 	name = "wall"
@@ -401,6 +406,10 @@
 	icon_state = "wall0"
 	plane = GAME_PLANE
 
+/turf/closed/shuttle/escapeshuttle
+	icon_state = "swall0"
+	smoothing_behavior = CARDINAL_SMOOTHING
+	smoothing_groups = SMOOTH_ESCAPESHUTTLE
 
 /turf/closed/banish_space //Brazil
 	plane = PLANE_SPACE

@@ -7,7 +7,9 @@
 	mechanics_text = "Become harder to see, almost invisible if you stand still, and ready a sneak attack. Uses plasma to move."
 	ability_name = "stealth"
 	plasma_cost = 10
-	keybind_signal = COMSIG_XENOABILITY_TOGGLE_STEALTH
+	keybinding_signals = list(
+		KEYBINDING_NORMAL = COMSIG_XENOABILITY_TOGGLE_STEALTH,
+	)
 	cooldown_timer = HUNTER_STEALTH_COOLDOWN
 	var/last_stealth = null
 	var/stealth = FALSE
@@ -38,7 +40,9 @@
 	if(stealth)
 		cancel_stealth()
 		return TRUE
-
+	if(HAS_TRAIT_FROM(owner, TRAIT_TURRET_HIDDEN, STEALTH_TRAIT))   // stops stealth and disguise from stacking
+		owner.balloon_alert(owner, "already in a form of stealth!")
+		return
 	succeed_activate()
 	to_chat(owner, "<span class='xenodanger'>We vanish into the shadows...</span>")
 	last_stealth = world.time
@@ -217,6 +221,9 @@
 /datum/action/xeno_action/stealth/disguise
 	name = "Disguise"
 	mechanics_text = "Disguise yourself as the enemy. Uses plasma to move. Select your disguise with Hunter's Mark."
+	keybinding_signals = list(
+		KEYBINDING_NORMAL = COMSIG_XENOABILITY_TOGGLE_DISGUISE,
+	)
 	///the regular appearance of the hunter
 	var/old_appearance
 
@@ -226,7 +233,9 @@
 		return TRUE
 	var/mob/living/carbon/xenomorph/xenoowner = owner
 	var/datum/action/xeno_action/activable/hunter_mark/mark = xenoowner.actions_by_path[/datum/action/xeno_action/activable/hunter_mark]
-
+	if(HAS_TRAIT_FROM(owner, TRAIT_TURRET_HIDDEN, STEALTH_TRAIT))   // stops stealth and disguise from stacking
+		owner.balloon_alert(owner, "already in a form of stealth!")
+		return
 	if(!mark.marked_target)
 		to_chat(owner, span_warning("We have no target to disguise into!"))
 		return
@@ -275,7 +284,9 @@
 	action_icon_state = "hunter_mark"
 	mechanics_text = "Psychically mark a creature you have line of sight to, allowing you to sense its direction, distance and location with Psychic Trace."
 	plasma_cost = 25
-	keybind_signal = COMSIG_XENOABILITY_HUNTER_MARK
+	keybinding_signals = list(
+		KEYBINDING_NORMAL = COMSIG_XENOABILITY_HUNTER_MARK,
+	)
 	cooldown_timer = 60 SECONDS
 	///the target marked
 	var/atom/movable/marked_target
@@ -356,7 +367,9 @@
 	action_icon_state = "toggle_queen_zoom"
 	mechanics_text = "Psychically ping the creature you marked, letting you know its direction, distance and location, and general condition."
 	plasma_cost = 1 //Token amount
-	keybind_signal = COMSIG_XENOABILITY_PSYCHIC_TRACE
+	keybinding_signals = list(
+		KEYBINDING_NORMAL = COMSIG_XENOABILITY_PSYCHIC_TRACE,
+	)
 	cooldown_timer = HUNTER_PSYCHIC_TRACE_COOLDOWN
 
 /datum/action/xeno_action/psychic_trace/can_use_action(silent = FALSE, override_flags)
@@ -424,7 +437,9 @@
 	mechanics_text = "Create mirror images of ourselves. Reactivate to swap with an illusion."
 	ability_name = "mirage"
 	plasma_cost = 50
-	keybind_signal = COMSIG_XENOABILITY_MIRAGE
+	keybinding_signals = list(
+		KEYBINDING_NORMAL = COMSIG_XENOABILITY_MIRAGE,
+	)
 	cooldown_timer = 30 SECONDS
 	///How long will the illusions live
 	var/illusion_life_time = 10 SECONDS

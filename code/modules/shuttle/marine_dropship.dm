@@ -156,6 +156,8 @@
 	var/time_between_cycle = 0
 	///The timer to launch the dropship in automatic mode
 	var/cycle_timer
+	///If first landing is false intro sequence wont play
+	var/static/first_landing = TRUE
 
 /obj/docking_port/mobile/marine_dropship/register()
 	. = ..()
@@ -167,6 +169,13 @@
 		return
 	// pull the shuttle from datum/source, and state info from the shuttle itself
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_DROPSHIP_TRANSIT)
+	if(first_landing)
+		first_landing = FALSE
+		var/op_name = GLOB.operation_namepool[/datum/operation_namepool].get_random_name()
+		for(var/mob/living/carbon/human/human AS in GLOB.alive_human_list)
+			if(human.faction != FACTION_TERRAGOV)
+				return
+			human.play_screen_text("<span class='maptext' style=font-size:24pt;text-align:left valign='top'><u>[op_name]</u></span><br>" + "[SSmapping.configs[GROUND_MAP].map_name]<br>" + "[GAME_YEAR]-[time2text(world.realtime, "MM-DD")] [stationTimestamp("hh:mm")]<br>" + "Long Range Patrol Rapid Response Platoon<br>" + "[human.job.title], [human]", /obj/screen/text/screen_text/picture)
 
 /obj/docking_port/mobile/marine_dropship/proc/lockdown_all()
 	lockdown_airlocks("rear")
@@ -949,6 +958,48 @@
 /obj/structure/dropship_piece/two/front/left
 	icon_state = "blue_fl"
 
+/obj/structure/dropship_piece/tadpole
+	name = "\improper Tadpole"
+
+/obj/structure/dropship_piece/tadpole/rearleft
+	icon_state = "blue_rear_lc"
+
+/obj/structure/dropship_piece/tadpole/rearright
+	icon_state = "blue_rear_rc"
+
+/obj/structure/dropship_piece/tadpole/cockpit
+	desc = "The nose part of the tadpole, able to be destroyed."
+	max_integrity = 500
+	resistance_flags = XENO_DAMAGEABLE | DROPSHIP_IMMUNE
+	opacity = FALSE
+	layer = BELOW_OBJ_LAYER
+	throwpass = FALSE
+
+/obj/structure/dropship_piece/tadpole/cockpit/left
+	icon_state = "blue_cockpit_fl"
+
+/obj/structure/dropship_piece/tadpole/cockpit/right
+	icon_state = "blue_cockpit_fr"
+
+/obj/structure/dropship_piece/tadpole/cockpit/window
+	icon = 'icons/turf/dropship2.dmi'
+	icon_state = "1"
+
+/obj/structure/dropship_piece/tadpole/engine
+	icon_state = "tadpole_engine"
+	density = FALSE
+	opacity = FALSE
+
+/obj/structure/dropship_piece/tadpole/tadpole_nose
+	icon_state = "blue_front"
+	opacity = FALSE
+	density = FALSE
+
+/obj/structure/dropship_piece/tadpole/tadpole_nose/right
+	icon_state = "blue_fr"
+
+/obj/structure/dropship_piece/tadpole/tadpole_nose/left
+	icon_state = "blue_fl"
 
 /obj/structure/dropship_piece/two/cockpit/left
 	icon_state = "blue_cockpit_fl"

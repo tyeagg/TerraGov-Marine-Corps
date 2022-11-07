@@ -6,9 +6,20 @@
 /obj/effect/temp_visual/explosion
 	name = "explosion"
 	icon = 'icons/effects/explosion.dmi'
-	icon_state = "grenade"
-	duration = 0.8 SECONDS
-	pixel_x = -16
+	icon_state = "explosion"
+	duration = 8
+	light_system = STATIC_LIGHT
+
+/obj/effect/temp_visual/explosion/Initialize(mapload, radius, color)
+	. = ..()
+	set_light(radius, radius, color)
+
+	var/image/I = image(icon, src, icon_state, 10, pixel_x = -16, pixel_y = -16)
+	var/matrix/rotate = matrix()
+	rotate.Turn(rand(0, 359))
+	I.transform = rotate
+	overlays += I //we use an overlay so the explosion and light source are both in the correct location
+	icon_state = null
 
 //unsorted miscellaneous temporary visuals
 /obj/effect/temp_visual/dir_setting/bloodsplatter
@@ -116,7 +127,7 @@
 		return
 	var/datum/atom_hud/squad/squad_hud = GLOB.huds[hud_type]
 	squad_hud.add_to_hud(src)
-	SSminimaps.add_marker(src, src.z, marker_flags, icon_state_on)
+	SSminimaps.add_marker(src, src.z, marker_flags, icon_state_on, 'icons/UI_icons/map_blips_large.dmi')
 	set_visuals(faction)
 
 /obj/effect/temp_visual/order/attack_order
