@@ -33,6 +33,7 @@
 
 #define COMSIG_GLOB_AI_GOAL_SET "!ai_goal_set"
 #define COMSIG_GLOB_AI_MINION_RALLY "!ai_minion_rally"
+#define COMSIG_GLOB_HIVE_TARGET_DRAINED "!hive_target_drained"
 
 
 /// Sent when a marine dropship enters transit level
@@ -316,6 +317,9 @@
 // /obj/item/armor_module signals
 #define COMSIG_ARMOR_MODULE_ATTACHING "armor_module_attaching"
 #define COMSIG_ARMOR_MODULE_DETACHED "armor_module_detached"
+
+// vali specific
+#define COMSIG_CHEMSYSTEM_TOGGLED "chemsystem_toggled"
 
 // /obj/item/helmet_module signals
 #define COMSIG_HELMET_MODULE_ATTACHING "helmet_module_attaching"
@@ -636,6 +640,7 @@
 #define COMSIG_XENOABILITY_DROP_PLANT "xenoability_drop_plant"
 #define COMSIG_XENOABILITY_CHOOSE_PLANT "xenoability_choose_plant"
 #define COMSIG_XENOABILITY_SECRETE_RESIN "xenoability_secrete_resin"
+#define COMSIG_XENOABILITY_PLACE_ACID_WELL "place_acid_well"
 #define COMSIG_XENOABILITY_EMIT_RECOVERY "xenoability_emit_recovery"
 #define COMSIG_XENOABILITY_EMIT_WARDING "xenoability_emit_warding"
 #define COMSIG_XENOABILITY_EMIT_FRENZY "xenoability_emit_frenzy"
@@ -663,6 +668,7 @@
 #define COMSIG_XENOABILITY_BOMBARD "xenoability_bombard"
 
 #define COMSIG_XENOABILITY_THROW_HUGGER "xenoability_throw_hugger"
+#define COMSIG_XENOABILITY_CALL_YOUNGER "xenoability_call_younger"
 #define COMSIG_XENOABILITY_PLACE_TRAP "xenoability_place_trap"
 #define COMSIG_XENOABILITY_SPAWN_HUGGER "xenoability_spawn_hugger"
 #define COMSIG_XENOABILITY_SWITCH_HUGGER "xenoability_switch_hugger"
@@ -867,3 +873,7 @@
 //Signals for ais
 #define COMSIG_ESCORTING_ATOM_BEHAVIOUR_CHANGED "escorting_behaviour_changed"
 #define COMSIG_ESCORTED_ATOM_CHANGING "escorted_atom_changing"
+#define COMSIG_POINT_TO_ATOM "point_to_atom"
+
+/// from datum ui_act (usr, action)
+#define COMSIG_UI_ACT "COMSIG_UI_ACT"

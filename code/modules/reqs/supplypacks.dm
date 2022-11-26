@@ -31,6 +31,12 @@ OPERATIONS
 	group = "Operations"
 	containertype = /obj/structure/closet/crate
 
+/datum/supply_packs/imports/loot_pack
+	name = "TGMC Loot Pack"
+	notes = "Contains a random, but curated set of items, these packs are valued around 150 to 200 points. Some items can only be acquired from these. Spend responsibly."
+	contains = list(/obj/item/loot_box/tgmclootbox)
+	cost = 100
+
 /datum/supply_packs/operations/beacons_supply
 	name = "supply beacon"
 	contains = list(/obj/item/beacon/supply_beacon)
@@ -362,6 +368,12 @@ WEAPONS
 	cost = 6
 	available_against_xeno_only = TRUE
 
+/datum/supply_packs/weapons/rpg_regular_unguided
+	name = "RL-152 SADAR HE rocket (Unguided)"
+	contains = list(/obj/item/ammo_magazine/rocket/sadar/unguided)
+	cost = 6
+	available_against_xeno_only = TRUE
+
 /datum/supply_packs/weapons/rpg_ap
 	name = "RL-152 SADAR AP rocket"
 	contains = list(/obj/item/ammo_magazine/rocket/sadar/ap)
@@ -371,6 +383,12 @@ WEAPONS
 /datum/supply_packs/weapons/rpg_wp
 	name = "RL-152 SADAR WP rocket"
 	contains = list(/obj/item/ammo_magazine/rocket/sadar/wp)
+	cost = 5
+	available_against_xeno_only = TRUE
+
+/datum/supply_packs/weapons/rpg_wp_unguided
+	name = "RL-152 SADAR WP rocket (Unguided)"
+	contains = list(/obj/item/ammo_magazine/rocket/sadar/wp/unguided)
 	cost = 5
 	available_against_xeno_only = TRUE
 
@@ -672,9 +690,9 @@ EXPLOSIVES
 	cost = 45
 
 /datum/supply_packs/explosives/mlrs_rockets
-	name = "TA-40L MLRS Rocket Pack (x8)"
+	name = "TA-40L MLRS Rocket Pack (x16)"
 	contains = list(/obj/item/storage/box/mlrs_rockets)
-	cost = 3
+	cost = 6
 
 /datum/supply_packs/explosives/howitzer
 	name = "MG-100Y howitzer"
@@ -1649,6 +1667,21 @@ FACTORY
 	contains = list(/obj/machinery/factory/reconstructor)
 	cost = 5
 
+/datum/supply_packs/factory/driller
+	name = "Industrial driller"
+	contains = list(/obj/machinery/factory/driller)
+	cost = 5
+
+/datum/supply_packs/factory/galvanizer
+	name = "Industrial galvanizer"
+	contains = list(/obj/machinery/factory/galvanizer)
+	cost = 5
+
+/datum/supply_packs/factory/compressor
+	name = "Industrial compressor"
+	contains = list(/obj/machinery/factory/driller)
+	cost = 5
+
 /datum/supply_packs/factory/unboxer
 	name = "Industrial Unboxer"
 	contains = list(/obj/machinery/unboxer)
@@ -1728,3 +1761,48 @@ FACTORY
 	name = "Railgun magazine assembly refill"
 	contains = list(/obj/item/factory_refill/railgun_magazine_refill)
 	cost = 20
+
+/datum/supply_packs/factory/minigun_powerpack_refill
+	name = "Minigun powerpack assembly refill"
+	contains = list(/obj/item/factory_refill/minigun_powerpack_refill)
+	cost = 25
+
+/datum/supply_packs/factory/razornade_refill
+	name = "Razornade assembly refill"
+	contains = list(/obj/item/factory_refill/razornade_refill)
+	cost = 50
+
+/datum/supply_packs/factory/amr_magazine_refill
+	name = "T-26 AMR magazine assembly refill"
+	contains = list(/obj/item/factory_refill/amr_magazine_refill)
+	cost = 40
+
+/datum/supply_packs/factory/amr_magazine_incend_refill
+	name = "T-26 AMR magazine assembly refill"
+	contains = list(/obj/item/factory_refill/amr_magazine_incend_refill)
+	cost = 40
+
+/datum/supply_packs/factory/amr_magazine_flak_refill
+	name = "T-26 AMR magazine assembly refill"
+	contains = list(/obj/item/factory_refill/amr_magazine_flak_refill)
+	cost = 40
+
+/datum/supply_packs/factory/howitzer_shell_he_refill
+	name = "Howitzer HE shell assembly refill"
+	contains = list(/obj/item/factory_refill/howitzer_shell_he_refill)
+	cost = 80
+
+/datum/supply_packs/factory/howitzer_shell_incen_refill
+	name = "Howitzer Incendiary shell assembly refill"
+	contains = list(/obj/item/factory_refill/howitzer_shell_incen_refill)
+	cost = 80
+
+/datum/supply_packs/factory/howitzer_shell_wp_refill
+	name = "Howitzer WP shell assembly refill"
+	contains = list(/obj/item/factory_refill/howitzer_shell_wp_refill)
+	cost = 100
+
+/datum/supply_packs/factory/howitzer_shell_tfoot_refill
+	name = "Howitzer Tanglefoot shell assembly refill"
+	contains = list(/obj/item/factory_refill/howitzer_shell_tfoot_refill)
+	cost = 100

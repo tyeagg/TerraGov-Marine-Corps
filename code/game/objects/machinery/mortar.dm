@@ -737,25 +737,30 @@
 	new /obj/item/storage/box/mlrs_rockets(src)
 	new /obj/item/storage/box/mlrs_rockets(src)
 	new /obj/item/storage/box/mlrs_rockets(src)
-	new /obj/item/storage/box/mlrs_rockets(src)
-	new /obj/item/storage/box/mlrs_rockets(src)
-	new /obj/item/storage/box/mlrs_rockets(src)
 	new /obj/item/encryptionkey/engi(src)
 	new /obj/item/encryptionkey/engi(src)
 	new /obj/item/binoculars/tactical/range(src)
 	new /obj/item/encryptionkey/cas(src)
 	new /obj/item/encryptionkey/cas(src)
 	new /obj/item/encryptionkey/cas(src)
-
+	new /obj/item/hud_tablet/artillery(src)
 
 
 /obj/item/storage/box/mlrs_rockets
 	name = "\improper TA-40L rocket crate"
 	desc = "A large case containing rockets in a compressed setting for the TA-40L MLRS. Drag this sprite into you to open it up!\nNOTE: You cannot put items back inside this case."
-	storage_slots = 8
+	storage_slots = 16
 
 /obj/item/storage/box/mlrs_rockets/Initialize()
 	. = ..()
+	new /obj/item/mortal_shell/rocket/mlrs(src)
+	new /obj/item/mortal_shell/rocket/mlrs(src)
+	new /obj/item/mortal_shell/rocket/mlrs(src)
+	new /obj/item/mortal_shell/rocket/mlrs(src)
+	new /obj/item/mortal_shell/rocket/mlrs(src)
+	new /obj/item/mortal_shell/rocket/mlrs(src)
+	new /obj/item/mortal_shell/rocket/mlrs(src)
+	new /obj/item/mortal_shell/rocket/mlrs(src)
 	new /obj/item/mortal_shell/rocket/mlrs(src)
 	new /obj/item/mortal_shell/rocket/mlrs(src)
 	new /obj/item/mortal_shell/rocket/mlrs(src)

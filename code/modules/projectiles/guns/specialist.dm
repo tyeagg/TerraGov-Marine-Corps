@@ -430,6 +430,8 @@ Note that this means that snipers will have a slowdown of 3, due to the scope
 	SSmonitor.stats.miniguns_in_use -= src
 	return ..()
 
+/obj/item/weapon/gun/minigun/magharness
+	starting_attachment_types = list(/obj/item/attachable/magnetic_harness)
 
 // SG minigun
 
@@ -609,8 +611,10 @@ Note that this means that snipers will have a slowdown of 3, due to the scope
 	default_ammo_type = /obj/item/ammo_magazine/rocket/sadar
 	allowed_ammo_types = list(
 		/obj/item/ammo_magazine/rocket/sadar,
+		/obj/item/ammo_magazine/rocket/sadar/unguided,
 		/obj/item/ammo_magazine/rocket/sadar/ap,
 		/obj/item/ammo_magazine/rocket/sadar/wp,
+		/obj/item/ammo_magazine/rocket/sadar/wp/unguided,
 	)
 	flags_equip_slot = NONE
 	w_class = WEIGHT_CLASS_HUGE
@@ -625,6 +629,7 @@ Note that this means that snipers will have a slowdown of 3, due to the scope
 	)
 
 	flags_gun_features = GUN_WIELDED_FIRING_ONLY|GUN_WIELDED_STABLE_FIRING_ONLY|GUN_AMMO_COUNTER
+
 	gun_skill_category = GUN_SKILL_FIREARMS
 	dry_fire_sound = 'sound/weapons/guns/fire/launcher_empty.ogg'
 	reload_sound = 'sound/weapons/guns/interact/launcher_reload.ogg'

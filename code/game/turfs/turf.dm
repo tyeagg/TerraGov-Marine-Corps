@@ -56,7 +56,6 @@
 	///Lazylist of movable atoms providing opacity sources.
 	var/list/atom/movable/opacity_sources
 
-
 /turf/Initialize(mapload)
 	SHOULD_CALL_PARENT(FALSE) // anti laggies
 	if(flags_atom & INITIALIZED)
@@ -518,6 +517,9 @@
 //Does NOT return a message, just a 0 or 1.
 /turf/proc/is_weedable()
 	return !density
+
+/turf/closed/wall/is_weedable()
+	return TRUE
 
 /turf/open/space/is_weedable()
 	return FALSE
