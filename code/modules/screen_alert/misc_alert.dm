@@ -42,3 +42,6 @@
 
 /obj/screen/text/screen_text/picture/potrait/artillery
 	image_to_play = "artillery"
+
+/obj/screen/text/screen_text/picture/potrait/cadia
+	image_to_play = "cadia"
