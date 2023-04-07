@@ -366,6 +366,15 @@
 /obj/machinery/telecomms/relay/preset/telecomms,
 /turf/open/floor/mainship,
 /area/mainship/patrol_base/telecomms)
+"gc" = (
+/obj/effect/turf_decal/warning_stripes/thin{
+	dir = 8
+	},
+/obj/machinery/light/mainship/blue{
+	dir = 8
+	},
+/turf/open/floor/mainship/mono,
+/area/mainship/arrow_of_artemis)
 "gr" = (
 /obj/structure/stairs{
 	dir = 1
@@ -1217,6 +1226,13 @@
 	dir = 1
 	},
 /area/mainship/arrow_of_artemis)
+"AN" = (
+/obj/structure/largecrate,
+/obj/machinery/light/mainship/blue{
+	dir = 1
+	},
+/turf/open/floor/mainship/mono,
+/area/mainship/arrow_of_artemis)
 "AP" = (
 /obj/effect/turf_decal/warning_stripes/leader{
 	pixel_y = 11
@@ -1809,6 +1825,12 @@
 /obj/effect/turf_decal/warning_stripes/stripedsquare,
 /turf/open/floor/mainship/purple/full,
 /area/mainship/arrow_of_artemis)
+"ND" = (
+/obj/machinery/light/mainship/blue{
+	dir = 4
+	},
+/turf/open/floor/mainship/mono,
+/area/mainship/arrow_of_artemis)
 "NF" = (
 /obj/machinery/telecomms/processor/preset_four,
 /turf/open/floor/mainship,
@@ -2134,6 +2156,10 @@
 	dir = 1
 	},
 /turf/open/floor/mainship/sterile/dark,
+/area/mainship/arrow_of_artemis)
+"TT" = (
+/obj/machinery/floodlight/landing,
+/turf/open/floor/plating/ground/concrete,
 /area/mainship/arrow_of_artemis)
 "TX" = (
 /obj/structure/table/black,
@@ -3270,13 +3296,13 @@ PB
 iu
 WV
 hT
-iu
+nY
 iu
 yA
 iu
 EH
 hT
-iu
+nY
 iu
 Gx
 hT
@@ -3455,13 +3481,13 @@ hT
 PK
 PK
 PK
+gc
 PK
 PK
 PK
 PK
 PK
-PK
-PK
+gc
 iu
 Oa
 fm
@@ -3766,7 +3792,7 @@ at
 BW
 BW
 BW
-BW
+TT
 BW
 BW
 BW
@@ -4141,10 +4167,10 @@ Wy
 iu
 iu
 iu
+ND
 iu
 iu
-iu
-iu
+ND
 dB
 rm
 Od
@@ -4262,14 +4288,14 @@ nY
 iu
 iu
 iu
-iu
+ND
 iu
 iu
 hT
-QZ
+AN
 QZ
 hT
-QZ
+AN
 QS
 hT
 ri

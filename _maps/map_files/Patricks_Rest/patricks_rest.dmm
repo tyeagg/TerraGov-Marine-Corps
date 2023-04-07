@@ -1659,7 +1659,7 @@
 /turf/open/floor/mainship/mono,
 /area/patricks_rest/surface/building/storage_depot_research)
 "hN" = (
-/obj/structure/spawner_cave/runner,
+/obj/effect/landmark/spawner_cave_runner,
 /turf/open/floor/plating/ground/mars/random/sand,
 /area/patricks_rest/ground/colonycent)
 "hO" = (
@@ -2046,7 +2046,7 @@
 /turf/open/floor/prison/red/full,
 /area/patricks_rest/surface/building/security_post_cargo)
 "jr" = (
-/obj/structure/spawner_cave,
+/obj/effect/landmark/spawner_cave_drone,
 /turf/open/floor/plating/ground/mars/random/cave/darker,
 /area/patricks_rest/ground/underground/cave)
 "jt" = (
@@ -3528,7 +3528,7 @@
 /turf/open/floor/mainship/mono,
 /area/patricks_rest/surface/building/ore)
 "pO" = (
-/obj/structure/spawner_cave,
+/obj/effect/landmark/spawner_cave_drone,
 /turf/open/floor/plating/ground/mars/random/sand,
 /area/patricks_rest/ground/colonys)
 "pP" = (
@@ -3782,7 +3782,7 @@
 /turf/open/ground/grasspatch/grassyellow,
 /area/patricks_rest/surface/building/atc)
 "qU" = (
-/obj/structure/spawner_cave/runner,
+/obj/effect/landmark/spawner_cave_runner,
 /turf/open/floor/plating/ground/mars/random/sand,
 /area/patricks_rest/ground/colonynw)
 "qV" = (
@@ -3917,7 +3917,7 @@
 /turf/open/floor/prison/whitegreenfull2,
 /area/patricks_rest/surface/building/residential_w)
 "rE" = (
-/obj/structure/spawner_cave/runner,
+/obj/effect/landmark/spawner_cave_runner,
 /turf/open/ground/grasspatch/grassyellow,
 /area/patricks_rest/ground/colonysw)
 "rF" = (
@@ -5703,7 +5703,7 @@
 /turf/open/floor/prison/darkyellow/full,
 /area/patricks_rest/surface/building/hydro)
 "Af" = (
-/obj/structure/spawner_cave/sentinel,
+/obj/effect/landmark/spawner_cave_sentinel,
 /turf/open/floor/plating/ground/mars/random/sand,
 /area/patricks_rest/ground/colonycent)
 "Ah" = (
@@ -6778,7 +6778,7 @@
 /turf/open/floor/prison/darkpurple/full,
 /area/patricks_rest/surface/building/residential_e)
 "Fn" = (
-/obj/structure/spawner_cave/sentinel,
+/obj/effect/landmark/spawner_cave_sentinel,
 /turf/open/floor/plating/ground/mars/random/sand,
 /area/patricks_rest/ground/colonysw)
 "Fo" = (
@@ -6979,7 +6979,7 @@
 /turf/open/floor/concrete,
 /area/patricks_rest/ground/underground/cave)
 "Gi" = (
-/obj/structure/spawner_cave/runner,
+/obj/effect/landmark/spawner_cave_runner,
 /turf/open/floor/plating/ground/desertdam/asphalt/cement,
 /area/patricks_rest/ground/colonyse)
 "Gj" = (
@@ -8774,7 +8774,7 @@
 /turf/open/floor/mainship/sterile,
 /area/patricks_rest/surface/building/medbay)
 "Os" = (
-/obj/structure/spawner_cave/sentinel,
+/obj/effect/landmark/spawner_cave_sentinel,
 /turf/open/floor/plating/ground/mars/random/sand,
 /area/patricks_rest/ground/colonynw)
 "Ot" = (
@@ -9815,7 +9815,7 @@
 /turf/open/ground/grasspatch/grassyellow,
 /area/patricks_rest/ground/colonycent)
 "SY" = (
-/obj/structure/spawner_cave,
+/obj/effect/landmark/spawner_cave_drone,
 /turf/open/floor/plating/ground/mars/random/sand,
 /area/patricks_rest/ground/colonyn)
 "Ta" = (
@@ -10637,7 +10637,7 @@
 /turf/open/floor/mainship/sterile,
 /area/patricks_rest/surface/building/medbay)
 "WZ" = (
-/obj/structure/spawner_cave/runner,
+/obj/effect/landmark/spawner_cave_runner,
 /turf/open/floor/plating/ground/mars/random/cave/darker,
 /area/patricks_rest/ground/underground/cave)
 "Xa" = (

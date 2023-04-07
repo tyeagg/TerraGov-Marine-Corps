@@ -1614,7 +1614,7 @@ TUNNEL
 	name = "cave entrance"
 	desc = "A cave entrance to a subterranean network of caves, xenomorphs are crawling out of it. Better collapse it."
 	icon = 'icons/xeno/2x2building.dmi'
-	icon_state = "big_tunnel"
+	icon_state = "tunnel"
 	pixel_x = -16
 	pixel_y = -16
 	max_integrity = 500
@@ -1654,6 +1654,7 @@ TUNNEL
 		return INITIALIZE_HINT_QDEL
 	. = ..()
 	SSspawning.registerspawner(src, spawndelay, spawntypes, maxamount, spawnamount, use_postspawn ? CALLBACK(src, PROC_REF(postspawn)) : null)
+	SSminimaps.add_marker(src, z, hud_flags = MINIMAP_FLAG_ALL, "spawner_cave", 'icons/UI_icons/map_blips_large.dmi')
 
 ///This proc runs on the created mobs if use_postspawn is enabled
 /obj/structure/spawner_cave/proc/postspawn(list/squad)

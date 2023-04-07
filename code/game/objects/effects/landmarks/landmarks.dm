@@ -472,3 +472,30 @@
 	..()
 	GLOB.psy_towers += loc
 	return INITIALIZE_HINT_QDEL
+
+/obj/effect/landmark/spawner_cave_drone
+	name = "tunnel spawner"
+	icon_state = "spawner_drone"
+
+/obj/effect/landmark/spawner_cave_drone/Initialize()
+	..()
+	GLOB.spawner_cave_drone += loc
+	return INITIALIZE_HINT_QDEL
+
+/obj/effect/landmark/spawner_cave_runner
+	name = "tunnel spawner"
+	icon_state = "spawner_runner"
+
+/obj/effect/landmark/spawner_cave_runner/Initialize()
+	..()
+	GLOB.spawner_cave_runner += loc
+	return INITIALIZE_HINT_QDEL
+
+/obj/effect/landmark/spawner_cave_sentinel
+	name = "tunnel spawner"
+	icon_state = "spawner_sentinel"
+
+/obj/effect/landmark/spawner_cave_sentinel/Initialize()
+	..()
+	GLOB.spawner_cave_sentinel += loc
+	return INITIALIZE_HINT_QDEL

@@ -35,6 +35,12 @@
 	. = ..()
 	for(var/turf/T AS in GLOB.psy_towers)
 		new /obj/structure/sensor_tower_patrol/psy(T)
+	for(var/turf/T AS in GLOB.spawner_cave_drone)
+		new /obj/structure/spawner_cave(T)
+	for(var/turf/T AS in GLOB.spawner_cave_runner)
+		new /obj/structure/spawner_cave/runner(T)
+	for(var/turf/T AS in GLOB.spawner_cave_sentinel)
+		new /obj/structure/spawner_cave/sentinel(T)
 
 /datum/game_mode/psy_sensors/scale_roles()
 	. = ..()
