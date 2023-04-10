@@ -3,7 +3,7 @@ GLOBAL_LIST_INIT(quick_loadouts, init_quick_loadouts())
 ///The list is shared across all quick vendors, but they will only display the tabs specified by the vendor, and only show the loadouts with jobs that match the displayed tabs.
 /proc/init_quick_loadouts()
 	. = list()
-	var/list/loadout_list = list(
+	var/list/loadout_list_hvh = list(
 		/datum/outfit/quick/tgmc/marine/standard_carbine,
 		/datum/outfit/quick/tgmc/marine/standard_assaultrifle,
 		/datum/outfit/quick/tgmc/marine/combat_rifle,
@@ -76,8 +76,16 @@ GLOBAL_LIST_INIT(quick_loadouts, init_quick_loadouts())
 		/datum/outfit/quick/som/squad_leader/mpi,
 	)
 
-	for(var/X in loadout_list)
-		.[X] = new X
+	var/list/loadout_list_hvx = list(
+		/datum/outfit/quick/tgmc/marine/standard_carbine,
+		/datum/outfit/quick/tgmc/marine/standard_assaultrifle,
+	)
+	if(iscombatpatrolgamemode(SSticker.mode))
+		for(var/X in loadout_list_hvh)
+			.[X] = new X
+	else
+		for(var/X in loadout_list_hvx)
+			.[X] = new X
 
 
 /obj/machinery/quick_vendor

@@ -556,6 +556,11 @@
 /obj/structure/prop/vehicle/crawler/crawler_fuel,
 /turf/open/floor/mainship/mono,
 /area/mainship/arrow_of_artemis)
+"km" = (
+/obj/machinery/cic_maptable,
+/obj/structure/table/black,
+/turf/open/floor/mainship/mono,
+/area/mainship/arrow_of_artemis)
 "kF" = (
 /obj/effect/turf_decal/warning_stripes/stripedsquare,
 /turf/open/floor/mainship/blue/full,
@@ -3375,7 +3380,7 @@ Rc
 hT
 hT
 hV
-FL
+km
 ak
 ve
 ve
@@ -3383,7 +3388,7 @@ lR
 ve
 ve
 JR
-FL
+km
 bv
 hT
 iu
@@ -3503,7 +3508,7 @@ SO
 ak
 ve
 oZ
-FL
+km
 oZ
 ve
 JR
@@ -3621,7 +3626,7 @@ iu
 rR
 hT
 ZB
-FL
+km
 mg
 iu
 Fp
@@ -3633,7 +3638,7 @@ HB
 Ja
 iu
 bD
-FL
+km
 bD
 zi
 Xs
@@ -3993,7 +3998,7 @@ Vz
 ZV
 hT
 mg
-FL
+km
 mg
 iu
 iq
@@ -4005,7 +4010,7 @@ IV
 EQ
 iu
 bD
-FL
+km
 bD
 hT
 Xs
@@ -4123,7 +4128,7 @@ al
 tz
 ve
 oZ
-FL
+km
 oZ
 ve
 nA
@@ -4243,7 +4248,7 @@ iu
 iu
 hT
 Zk
-FL
+km
 tz
 ve
 Da
@@ -4251,7 +4256,7 @@ yC
 ve
 ve
 nA
-FL
+km
 gA
 hT
 Mv

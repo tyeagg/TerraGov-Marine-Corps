@@ -243,7 +243,7 @@
 	icon_state = "psy"
 	faction = FACTION_XENO
 	deactivate_time = 5 SECONDS
-	var/obj/effect/landmark/patrol_point/exit_point = /obj/effect/landmark/patrol_point
+	var/obj/effect/landmark/patrol_point/exit_point
 
 /obj/structure/sensor_tower_patrol/psy/attack_alien(mob/living/carbon/xenomorph/X, damage_amount = X.xeno_caste.melee_damage, damage_type = BRUTE, damage_flag = "", effects = TRUE, armor_penetration = 0, isrightclick = FALSE)
 	defender_interaction(X)

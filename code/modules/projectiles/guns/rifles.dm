@@ -180,6 +180,9 @@
 /obj/item/weapon/gun/rifle/standard_assaultrifle/medic
 	starting_attachment_types = list(/obj/item/attachable/stock/t12stock, /obj/item/attachable/magnetic_harness, /obj/item/attachable/extended_barrel, /obj/item/weapon/gun/grenade_launcher/underslung)
 
+/obj/item/weapon/gun/rifle/standard_assaultrifle/rifleman_hvx
+	starting_attachment_types = list(/obj/item/attachable/stock/t12stock, /obj/item/attachable/magnetic_harness, /obj/item/attachable/extended_barrel, /obj/item/weapon/gun/grenade_launcher/underslung)
+
 //-------------------------------------------------------
 //DMR-37 DMR
 

@@ -1619,16 +1619,17 @@ TUNNEL
 	pixel_y = -16
 	max_integrity = 500
 	resistance_flags = UNACIDABLE | DROPSHIP_IMMUNE
+	light_range = 2
+	light_power = 1
+	light_color = "#9e1f1f"
 	///typepath or list of typepaths for the spawner to pick from
 	var/spawntypes = /mob/living/carbon/xenomorph/drone/ai_patrol
 	///Amount of types to spawn for each squad created
-	var/spawnamount = 1
+	var/spawnamount = 2
 	///Delay between squad spawns, dont set this to below SSspawning wait
 	var/spawndelay = 30 SECONDS
 	///Max amount of
-	var/maxamount = 2
-	///Whether we want to use the postspawn proc on the mobs created by the Spawner
-	var/use_postspawn = TRUE
+	var/maxamount = 5
 	///Typepath for the collapsed spawner it spawns when destroyed
 	var/collapsed_spawner = /obj/structure/collapsed_spawner
 	///Amount of followers of the leader
@@ -1646,21 +1647,17 @@ TUNNEL
 			take_damage(200)
 
 /obj/structure/spawner_cave/Initialize()
-	if(!spawntypes || !spawnamount)
-		stack_trace("Invalid spawn parameters on spawner, deleting")
-		return INITIALIZE_HINT_QDEL
-	if(spawndelay < SSspawning.wait)
-		stack_trace("Spawndelay too low, deleting spawner")
-		return INITIALIZE_HINT_QDEL
 	. = ..()
-	SSspawning.registerspawner(src, spawndelay, spawntypes, maxamount, spawnamount, use_postspawn ? CALLBACK(src, PROC_REF(postspawn)) : null)
-	SSminimaps.add_marker(src, z, hud_flags = MINIMAP_FLAG_ALL, "spawner_cave", 'icons/UI_icons/map_blips_large.dmi')
+	//intentional for it to show to all
+	SSminimaps.add_marker(src, z, MINIMAP_FLAG_ALL, "spawner_cave", 'icons/UI_icons/map_blips_large.dmi')
+	SSspawning.registerspawner(src, spawndelay, spawntypes, maxamount, spawnamount, CALLBACK(src, PROC_REF(postspawn)))
 
 ///This proc runs on the created mobs if use_postspawn is enabled
 /obj/structure/spawner_cave/proc/postspawn(list/squad)
-	var/leader = pick_n_take(squad)
-	for(var/i in 1 to amount_to_spawn)
-		new follower_xeno(loc, leader)
+	for(var/i in 1 to length(squad))
+		var/leader = squad[i]
+		for(var/follower in 1 to amount_to_spawn)
+			new follower_xeno(loc, leader)
 	return
 
 /obj/structure/spawner_cave/obj_destruction()
@@ -1683,7 +1680,7 @@ TUNNEL
 	name = "collapsed cave entrance"
 	desc = "A cave entrance to a subterranean network of caves, this one has collapsed but its only a matter of time before its open again."
 	icon = 'icons/xeno/2x2building.dmi'
-	icon_state = "big_tunnel_collapse"
+	icon_state = "tunnel_collapse"
 	pixel_x = -16
 	pixel_y = -16
 	resistance_flags = RESIST_ALL

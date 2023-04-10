@@ -651,6 +651,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
+/obj/effect/ai_node,
 /turf/open/ground/grasspatch/grassyellow,
 /area/patricks_rest/surface/building/hydro)
 "cW" = (
@@ -1726,6 +1727,7 @@
 /area/patricks_rest/surface/building/science)
 "ia" = (
 /obj/structure/flora/desert/grass/heavy/eight,
+/obj/effect/ai_node,
 /turf/open/ground/grasspatch/grassyellow,
 /area/patricks_rest/surface/building/hydro)
 "ib" = (
@@ -2943,6 +2945,11 @@
 "nv" = (
 /turf/open/floor/concrete/lines,
 /area/patricks_rest/ground/colonynw)
+"nw" = (
+/obj/structure/bed/chair/sofa/corsat/right,
+/obj/effect/ai_node,
+/turf/open/floor/prison/darkyellow/full,
+/area/patricks_rest/surface/building/engineering)
 "nx" = (
 /turf/closed/shuttle/dropship2/engineone/alt{
 	dir = 8
@@ -3495,6 +3502,10 @@
 	},
 /turf/open/floor/mainship/mono,
 /area/patricks_rest/surface/building/engineering)
+"pH" = (
+/obj/effect/ai_node,
+/turf/open/ground/river,
+/area/patricks_rest/surface/building/residential_w)
 "pI" = (
 /obj/structure/curtain/open,
 /obj/machinery/shower{
@@ -6464,9 +6475,8 @@
 /turf/open/floor/concrete/lines,
 /area/patricks_rest/ground/colonyse)
 "DO" = (
-/obj/effect/ai_node,
-/obj/structure/platform/metalplatform{
-	dir = 4
+/obj/structure/stairs/seamless{
+	dir = 8
 	},
 /turf/open/ground/river,
 /area/patricks_rest/surface/building/residential_w)
@@ -13088,9 +13098,9 @@ NN
 NN
 Vu
 Vu
-Vu
-Vu
 Lx
+Vu
+Vu
 Vu
 Vu
 Vu
@@ -13221,7 +13231,7 @@ KM
 dB
 dB
 dB
-uW
+dB
 dB
 dB
 dB
@@ -13748,8 +13758,8 @@ Vu
 Lx
 NN
 gS
-Iz
-Lx
+nw
+Vu
 Vu
 NN
 NN
@@ -14645,9 +14655,9 @@ OK
 OK
 OK
 Ev
-QS
 AD
-qZ
+AD
+KP
 KP
 KP
 ao
@@ -18023,11 +18033,11 @@ yD
 sI
 ff
 HX
+pH
 HX
 HX
 HX
-HX
-HX
+pH
 HX
 ff
 KB
@@ -18288,9 +18298,9 @@ Md
 ff
 PS
 DO
-HX
-HX
-HX
+PS
+PS
+PS
 DO
 PS
 ff
@@ -20070,7 +20080,7 @@ fk
 fk
 fk
 fk
-is
+XU
 AZ
 AZ
 va

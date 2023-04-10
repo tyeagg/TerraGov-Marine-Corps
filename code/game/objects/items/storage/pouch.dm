@@ -373,6 +373,15 @@
 	fill_type = /obj/item/explosive/grenade
 	fill_number = 4
 
+/obj/item/storage/pouch/grenade/hvx/Initialize()
+	. = ..()
+	new /obj/item/explosive/grenade(src)
+	new /obj/item/explosive/grenade(src)
+	new /obj/item/explosive/grenade(src)
+	new /obj/item/explosive/grenade(src)
+	new /obj/item/explosive/grenade(src)
+	new /obj/item/explosive/grenade(src)
+
 /obj/item/storage/pouch/grenade/combat_patrol/Initialize()
 	. = ..()
 	new /obj/item/explosive/grenade/smokebomb(src)
@@ -422,6 +431,16 @@
 		/obj/item/storage/pill_bottle/packet,
 		/obj/item/reagent_containers/hypospray,
 	)
+
+/obj/item/storage/pouch/medkit/hvx/Initialize()
+	. = ..()
+	new /obj/item/storage/pill_bottle/packet/bicaridine(src)
+	new /obj/item/storage/pill_bottle/packet/kelotane(src)
+	new /obj/item/storage/pill_bottle/packet/tramadol(src)
+	new /obj/item/storage/pill_bottle/packet/tricordrazine(src)
+	new /obj/item/storage/pill_bottle/packet/dylovene(src)
+	new /obj/item/stack/medical/heal_pack/gauze(src)
+	new /obj/item/stack/medical/heal_pack/ointment(src)
 
 /obj/item/storage/pouch/medkit/firstaid
 	desc = "Standard marine first-aid pouch. Contains basic pills, splints, and a stabilizing injector."
