@@ -67,10 +67,15 @@
 	///Used for remote targeting by AI
 	var/obj/item/ai_target_beacon/ai_targeter
 
+	// used for keeping track of different mortars and their types for cams
+	var/static/list/id_by_type = list()
+
 /obj/machinery/deployable/mortar/Initialize(mapload, _internal_item, deployer)
 	. = ..()
+
 	impact_cam = new
 	impact_cam.forceMove(src)
+	impact_cam.c_tag = "[strip_improper(name)] #[++id_by_type[type]]"
 
 /obj/machinery/deployable/mortar/Destroy()
 	QDEL_NULL(impact_cam)
@@ -259,7 +264,7 @@
 	shell.generate_bullet(ammo)
 	var/shell_range = min(get_dist_euclide(src,target), ammo.max_range)
 	shell.fire_at(target, src, src, shell_range, ammo.shell_speed)
-	var/fall_time = shell_range/ammo.shell_speed - 1 SECONDS
+	var/fall_time = (shell_range/(ammo.shell_speed * 5)) - 0.5 SECONDS
 	//prevent runtime
 	if(fall_time < 0.5 SECONDS)
 		fall_time = 0.5 SECONDS
@@ -391,7 +396,7 @@
 	resistance_flags = RESIST_ALL
 	w_class = WEIGHT_CLASS_BULKY //No dumping this in most backpacks. Carry it, fatso
 
-/obj/item/mortar_kit/Initialize()
+/obj/item/mortar_kit/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/deployable_item, deployable_item, 1 SECONDS)
 
@@ -753,7 +758,7 @@
 	desc = "A large case containing rockets in a compressed setting for the TA-40L MLRS. Drag this sprite into you to open it up!\nNOTE: You cannot put items back inside this case."
 	storage_slots = 16
 
-/obj/item/storage/box/mlrs_rockets/Initialize()
+/obj/item/storage/box/mlrs_rockets/Initialize(mapload)
 	. = ..()
 	new /obj/item/mortal_shell/rocket/mlrs(src)
 	new /obj/item/mortal_shell/rocket/mlrs(src)

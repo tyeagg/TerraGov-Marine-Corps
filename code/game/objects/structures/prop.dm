@@ -121,7 +121,7 @@
 	resistance_flags = RESIST_ALL
 
 
-/obj/structure/prop/mainship/deadai/Initialize()
+/obj/structure/prop/mainship/deadai/Initialize(mapload)
 	. = ..()
 	icon_state = pick(
 		"ai_dead",
@@ -323,7 +323,7 @@
 /obj/structure/prop/mainship/name_stencil/C
 	icon_state = "TGMC4"
 
-/obj/structure/prop/mainship/name_stencil/Initialize()
+/obj/structure/prop/mainship/name_stencil/Initialize(mapload)
 	. = ..()
 	name = SSmapping.configs[SHIP_MAP].map_name
 
@@ -527,6 +527,7 @@
 /obj/structure/prop/mainship/research/circuit_imprinter
 	name = "Circuit Imprinter"
 	icon_state = "circuit_imprinter"
+	desc = "Manufactures circuit boards for the construction of machines."
 
 /obj/structure/prop/mainship/research/mechafab
 	icon_state = "mechfab1"
@@ -535,6 +536,7 @@
 
 /obj/structure/prop/mainship/research/destructive_analyzer
 	name = "Destructive Analyzer"
+	desc = "Learn science by destroying things!"
 	icon_state = "d_analyzer"
 
 /obj/structure/prop/mainship/research/tdoppler
@@ -773,7 +775,7 @@
 	icon_state = "pump_map-2"
 
 /obj/structure/prop/mainship/pipeprop/pump/on
-	icon_state =  "pump_on"
+	icon_state = "pump_on"
 	layer = GAS_PUMP_LAYER
 
 /obj/structure/prop/mainship/halfbuilt_mech
@@ -788,7 +790,7 @@
 		MECH_GREY_L_ARM = MECH_ASSAULT,
 	)
 
-/obj/structure/prop/mainship/halfbuilt_mech/Initialize()
+/obj/structure/prop/mainship/halfbuilt_mech/Initialize(mapload)
 	. = ..()
 	var/default_colors = MECH_GREY_PRIMARY_DEFAULT + MECH_GREY_SECONDARY_DEFAULT
 	var/default_visor = MECH_GREY_VISOR_DEFAULT
@@ -919,7 +921,7 @@
 	desc = "A storage device for AIs. Patent pending."
 	icon_state = "aicard"
 
-/obj/item/prop/aicard/Initialize()
+/obj/item/prop/aicard/Initialize(mapload)
 	. = ..()
 	if(prob(50))
 		icon_state = "aicard-404"
@@ -936,7 +938,7 @@
 	icon = 'icons/obj/items/card.dmi'
 	icon_state = "dogtag"
 
-/obj/item/prop/dogtag/random/Initialize()
+/obj/item/prop/dogtag/random/Initialize(mapload)
 	. = ..()
 	name = GLOB.namepool[/datum/namepool].get_random_name(pick(MALE, FEMALE))
 
@@ -1011,7 +1013,7 @@
 	resistance_flags = RESIST_ALL
 	layer = ABOVE_MOB_LAYER
 
-/obj/structure/prop/vehicle/van/Initialize()
+/obj/structure/prop/vehicle/van/Initialize(mapload)
 	. = ..()
 	if(dir & (NORTH|SOUTH))
 		bound_height = 64
@@ -1043,6 +1045,7 @@
 /obj/structure/prop/vehicle/truck/truckcargo/destructible
 	max_integrity = 200
 	resistance_flags = XENO_DAMAGEABLE
+
 /obj/structure/prop/vehicle/crane
 	name = "crane"
 	desc = "An old crane, seems to be broken down."
@@ -1405,7 +1408,7 @@
 	resistance_flags = RESIST_ALL
 	layer = ABOVE_MOB_LAYER
 
-/obj/structure/prop/vehicle/apc/Initialize()
+/obj/structure/prop/vehicle/apc/Initialize(mapload)
 	. = ..()
 	if(dir == EAST || dir == WEST)
 		bound_height = 64
@@ -1744,7 +1747,7 @@
 	///var to control vendor appearance, can be vendor_broken, vendor_working or vendor_blank
 	var/vendorstate = VENDOR_BROKEN
 
-/obj/structure/prop/tgbrokenvendor/Initialize()
+/obj/structure/prop/tgbrokenvendor/Initialize(mapload)
 	. = ..()
 	vendorstate = pick(VENDOR_BROKEN, VENDOR_BLANK)
 	if(vendorstate == VENDOR_BROKEN)
@@ -2005,78 +2008,6 @@
 	name = "Port Quarter Solar Control"
 	desc = "A controller for solar panel arrays."
 	icon_state = "solar"
-
-/obj/structure/prop/catapult
-	density = FALSE
-	icon = 'icons/Marine/mainship_props96.dmi'
-	icon_state = "launcher"
-
-/obj/structure/prop/printer
-	name = "printer"
-	desc = "Machine for printing text or pictures onto paper."
-	icon = 'icons/obj/stationobjs.dmi'
-	icon_state = "printer"
-	density = TRUE
-	resistance_flags = XENO_DAMAGEABLE
-
-/obj/structure/prop/power_transformer
-	name = "Power transformer"
-	desc = "Transfers electrical energy from one electrical circuit to another circuit, or multiple circuits."
-	icon = 'icons/obj/structures/power_transformer.dmi'
-	icon_state = "transformer"
-	density = TRUE
-	bound_width = 64
-	bound_height = 64
-
-/obj/structure/prop/microscope
-	name = "Microscope"
-	icon = 'icons/obj/machines/virology.dmi'
-	icon_state = "microscope"
-	density = FALSE
-	resistance_flags = XENO_DAMAGEABLE
-
-/obj/structure/prop/survey
-	icon = 'icons/obj/machines/research.dmi'
-	icon_state = "surveying_device"
-	name = "Surveying Device"
-	resistance_flags = XENO_DAMAGEABLE
-
-/obj/structure/prop/measure
-	icon = 'icons/obj/machines/research.dmi'
-	icon_state = "measuring_device"
-	name = "Measuring Device"
-	resistance_flags = XENO_DAMAGEABLE
-
-/obj/structure/prop/big_science
-	icon = 'icons/obj/science_machines_64.dmi'
-	density = TRUE
-	anchored = TRUE
-	bound_width = 64
-
-/obj/structure/prop/big_science/modifier
-	icon_state = "modifier"
-	name = "Modifier"
-
-/obj/structure/prop/big_science/chemstorage
-	name = "Chem Storage"
-	icon_state = "chemstorage"
-
-/obj/structure/prop/big_science/operate
-	name = "Operator"
-	icon_state = "operator"
-
-/obj/structure/prop/big_science/protolathebig
-	name = "Protolathe"
-	icon_state = "protolathe"
-
-/obj/structure/prop/big_science/medilathe
-	name = "Medilathe"
-	icon_state = "medilathe"
-
-/obj/structure/prop/comm_tower
-	name = "Communication tower"
-	icon = 'icons/obj/structures/comm_tower.dmi'
-	icon_state = "comm_tower"
 
 #undef VENDOR_BROKEN
 #undef VENDOR_BLANK
