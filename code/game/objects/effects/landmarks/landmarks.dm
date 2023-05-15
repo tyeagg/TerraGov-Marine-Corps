@@ -463,6 +463,17 @@
 	GLOB.patrol_point_list -= src
 	return ..()
 
+/obj/effect/landmark/eord_roomba
+	name = "EORD roomba spawn point"
+
+/obj/effect/landmark/eord_roomba/Initialize(mapload)
+	. = ..()
+	GLOB.eord_roomba_spawns += src
+
+/obj/effect/landmark/eord_roomba/Destroy()
+	GLOB.eord_roomba_spawns -= src
+	return ..()
+
 /obj/effect/landmark/psy_tower
 	name = "Psy tower"
 	icon = 'icons/obj/structures/sensor.dmi'
