@@ -108,3 +108,6 @@
 /obj/effect/temp_visual/dropship_flyby/Initialize()
 	. = ..()
 	animate(src, pixel_z = 960, time = 3 SECONDS)
+
+/obj/effect/temp_visual/dropship_flyby/dropship
+	icon_state = "shadow"

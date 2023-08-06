@@ -403,6 +403,8 @@
 		)
 
 	mode = show_radial_menu(user, src, radial_options, null, 48, null, TRUE, TRUE)
+	if(!mode)
+		return
 	switch(mode)
 		if(MODE_GUN)
 			user.balloon_alert(user, "Gun run mode")
@@ -483,10 +485,7 @@
 		to_chat(user, span_warning("You're already targeting something."))
 		return
 
-	if(!mode)
-		balloon_alert_to_viewers("Select a mode!")
-		return
-	else if(mode == MODE_GUN && gun_timer)
+	if(mode == MODE_GUN && gun_timer)
 		balloon_alert_to_viewers("On cooldown.")
 		return
 	else if(mode == MODE_ROCKETS && rockets_timer)
@@ -532,10 +531,7 @@
 	laser = CS
 	if(!do_after(user, target_acquisition_delay, TRUE, user, BUSY_ICON_HOSTILE))
 		return
-	if(!mode)
-		balloon_alert_to_viewers("Select a mode!")
-		return
-	else if(mode == MODE_GUN && gun_timer)
+	if(mode == MODE_GUN && gun_timer)
 		balloon_alert_to_viewers("On cooldown.")
 		return
 	else if(mode == MODE_ROCKETS && rockets_timer)
@@ -551,13 +547,13 @@
 	switch(mode)
 		if(MODE_GUN)
 			to_chat(user, span_notice("TARGET ACQUIRED GUN RUN INBOUND."))
-			user.play_screen_text("<span class='maptext' style=font-size:24pt;text-align:left valign='top'><u>Garuda-2</u></span><br>" + "Target received, gun run inbound.", /atom/movable/screen/text/screen_text/picture/potrait/pilot)
-			playsound(TU, 'sound/effects/dropship_sonic_boom.ogg', 75)
+			user.play_screen_text("<span class='maptext' style=font-size:24pt;text-align:left valign='top'><u>Garuda-1</u></span><br>" + "Target received, gun run inbound.", /atom/movable/screen/text/screen_text/picture/potrait/pilot)
+			playsound(TU, 'sound/effects/dropship_sonic_boom.ogg', 100)
 			addtimer(CALLBACK(src, PROC_REF(gun_run), TU), delay_to_impact)
 		if(MODE_ROCKETS)
 			to_chat(user, span_notice("TARGET ACQUIRED ROCKET RUN INBOUND."))
-			user.play_screen_text("<span class='maptext' style=font-size:24pt;text-align:left valign='top'><u>Garuda-2</u></span><br>" + "Rockets hot, incoming!", /atom/movable/screen/text/screen_text/picture/potrait/pilot)
-			playsound(TU, 'sound/effects/dropship_sonic_boom.ogg', 75)
+			user.play_screen_text("<span class='maptext' style=font-size:24pt;text-align:left valign='top'><u>Garuda-1</u></span><br>" + "Rockets hot, incoming!", /atom/movable/screen/text/screen_text/picture/potrait/pilot)
+			playsound(TU, 'sound/effects/dropship_sonic_boom.ogg', 100)
 			addtimer(CALLBACK(src, PROC_REF(rocket_run), TU), delay_to_impact)
 		if(MODE_CRS_MSL)
 			to_chat(user, span_notice("TARGET ACQUIRED CRUISE MISSILE INBOUND."))
@@ -566,7 +562,8 @@
 			addtimer(CALLBACK(src, PROC_REF(cruise_missile), TU), delay_to_impact)
 		if(MODE_SUPPLY)
 			to_chat(user, span_notice("TARGET ACQUIRED SUPPLY CRATE INBOUND."))
-			user.play_screen_text("<span class='maptext' style=font-size:24pt;text-align:left valign='top'><u>Lt-Manley</u></span><br>" + "Supply crate sent.", /atom/movable/screen/text/screen_text/picture/potrait)
+			user.play_screen_text("<span class='maptext' style=font-size:24pt;text-align:left valign='top'><u>Foodie-1</u></span><br>" + "Supply crate out!", /atom/movable/screen/text/screen_text/picture/potrait/pilot)
+			playsound(TU, 'sound/effects/dropship_sonic_boom.ogg', 75)
 			addtimer(CALLBACK(src, PROC_REF(supply), TU), delay_to_impact)
 
 /obj/item/binoculars/fire_support/proc/gun_run(turf/T, attackdir = NORTH)
@@ -578,7 +575,7 @@
 		var/turf/impact_turf = pick(turf_list)
 		addtimer(CALLBACK(src, PROC_REF(gun_run_fire), impact_turf), 0.15 SECONDS * i)
 	new /obj/effect/temp_visual/dropship_flyby(T)
-	playsound(T, 'sound/effects/casplane_flyby.ogg', 40)
+	playsound(T, 'sound/effects/casplane_flyby.ogg', 100)
 	gun_timer = addtimer(CALLBACK(src, PROC_REF(gun_clear_timer)), gun_cooldown)
 
 /obj/item/binoculars/fire_support/proc/gun_run_fire(turf/T)
@@ -646,6 +643,7 @@
 
 /obj/item/binoculars/fire_support/proc/supply(turf/T)
 	QDEL_NULL(laser)
+	new /obj/effect/temp_visual/dropship_flyby/dropship(T)
 	new /obj/structure/largecrate/supply/ammo/psy(T)
 	supply_timer = addtimer(CALLBACK(src, PROC_REF(supply_clear_timer)), supply_cooldown)
 

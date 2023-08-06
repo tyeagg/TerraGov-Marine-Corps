@@ -1661,7 +1661,7 @@ TUNNEL
 /obj/structure/spawner_cave/Initialize()
 	. = ..()
 	//intentional for it to show to all
-	SSminimaps.add_marker(src, z, MINIMAP_FLAG_ALL, "spawner_cave", 'icons/UI_icons/map_blips_large.dmi')
+	SSminimaps.add_marker(src, MINIMAP_FLAG_ALL, image('icons/UI_icons/map_blips_large.dmi', null, "spawner_cave"))
 	SSspawning.registerspawner(src, spawndelay, spawntypes, maxamount, spawnamount, CALLBACK(src, PROC_REF(postspawn)))
 
 ///This proc runs on the created mobs if use_postspawn is enabled

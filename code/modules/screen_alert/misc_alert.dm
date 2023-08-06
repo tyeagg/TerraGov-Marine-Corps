@@ -24,8 +24,14 @@
 /atom/movable/screen/text/screen_text/picture/tdf
 	image_to_play = "tdf"
 
+/atom/movable/screen/text/screen_text/picture/thunderbeak
+	image_to_play = "thunderbeak"
+
 /atom/movable/screen/text/screen_text/picture/shokk
 	image_to_play = "shokk"
+
+/atom/movable/screen/text/screen_text/picture/hammerhead
+	image_to_play = "hammerhead"
 
 /atom/movable/screen/text/screen_text/picture/blackop
 	image_to_play = "blackops"

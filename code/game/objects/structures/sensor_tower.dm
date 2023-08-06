@@ -243,16 +243,34 @@
 	icon_state = "psy"
 	faction = FACTION_XENO
 	deactivate_time = 5 SECONDS
-	var/obj/effect/landmark/patrol_point/exit_point
+	var/obj/effect/landmark/patrol_point/exit_point = /obj/effect/landmark/patrol_point
+	max_integrity = 1000
 
-/obj/structure/sensor_tower_patrol/psy/attack_alien(mob/living/carbon/xenomorph/X, damage_amount = X.xeno_caste.melee_damage, damage_type = BRUTE, damage_flag = "", effects = TRUE, armor_penetration = 0, isrightclick = FALSE)
-	defender_interaction(X)
+/obj/structure/sensor_tower_patrol/psy/welder_act(mob/living/user, obj/item/I)
+	return welder_repair_act(user, I, 200, 2 SECONDS, fuel_req = 1)
+
+/obj/structure/sensor_tower_patrol/psy/ex_act(severity)
+	switch(severity)
+		if(EXPLODE_DEVASTATE)
+			take_damage(100)
+		if(EXPLODE_HEAVY)
+			take_damage(50)
+		if(EXPLODE_LIGHT)
+			take_damage(10)
+
+/obj/structure/sensor_tower_patrol/psy/obj_destruction()
+	deactivate()
+	obj_integrity = max_integrity
+	return
 
 /obj/structure/sensor_tower_patrol/psy/begin_activation()
 	. = ..()
 	exit_point = new exit_point(loc)
 	exit_point.id = 5
+	DISABLE_BITFIELD(resistance_flags, RESIST_ALL)
+	ENABLE_BITFIELD(resistance_flags, XENO_DAMAGEABLE)
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_PSY_INHIBITOR, src)
+	new /obj/effect/ai_node/goal(loc)
 
 /obj/structure/sensor_tower_patrol/finish_activation()
 	. = ..()
@@ -260,5 +278,7 @@
 
 /obj/structure/sensor_tower_patrol/psy/deactivate()
 	. = ..()
+	DISABLE_BITFIELD(resistance_flags, XENO_DAMAGEABLE)
+	ENABLE_BITFIELD(resistance_flags, RESIST_ALL)
 	QDEL_NULL(exit_point)
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_PSY_INHIBITOR_OFF, src)

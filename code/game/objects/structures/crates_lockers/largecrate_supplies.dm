@@ -233,16 +233,20 @@
 
 /obj/structure/largecrate/supply/ammo/psy/Initialize()
 	. = ..()
+	density = FALSE
 	pixel_y = 480
 	var/image/I = image('icons/obj/items/fulton_balloon.dmi', src, "fulton_balloon")
 	I.pixel_y = 25
 	overlays += I
+	layer = FLY_LAYER
 	playsound(loc, 'sound/items/fultext_deploy.ogg', 50)
 	animate(src, pixel_y = 0, time = 2 SECONDS, easing = LINEAR_EASING)
 	addtimer(CALLBACK(src, PROC_REF(clear_overlay)), 2 SECONDS)
 
 /obj/structure/largecrate/supply/ammo/psy/proc/clear_overlay()
 	overlays.Cut()
+	density = TRUE
+	layer = OBJ_LAYER
 
 /obj/structure/largecrate/supply/explosives
 	name = "explosives supply crate"

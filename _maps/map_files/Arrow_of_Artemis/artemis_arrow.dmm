@@ -117,13 +117,6 @@
 	},
 /turf/open/floor/mainship/mono,
 /area/mainship/arrow_of_artemis)
-"ba" = (
-/obj/structure/platform/metalplatform,
-/obj/structure/platform/metalplatform{
-	dir = 8
-	},
-/turf/open/floor/mainship/mono,
-/area/mainship/arrow_of_artemis)
 "bb" = (
 /obj/machinery/light/mainship/blue{
 	dir = 8
@@ -157,6 +150,9 @@
 	dir = 4
 	},
 /obj/structure/paper_bin,
+/obj/structure/platform/metalplatform{
+	dir = 6
+	},
 /turf/open/floor/mainship/mono,
 /area/mainship/arrow_of_artemis)
 "bv" = (
@@ -436,6 +432,9 @@
 	},
 /obj/item/megaphone,
 /obj/item/megaphone,
+/obj/structure/platform/metalplatform{
+	dir = 9
+	},
 /turf/open/floor/mainship/mono,
 /area/mainship/arrow_of_artemis)
 "hs" = (
@@ -844,6 +843,9 @@
 	},
 /obj/structure/window/reinforced/toughened,
 /obj/structure/prop/radio_prop,
+/obj/structure/platform/metalplatform{
+	dir = 10
+	},
 /turf/open/floor/mainship/mono,
 /area/mainship/arrow_of_artemis)
 "ri" = (
@@ -913,21 +915,6 @@
 /obj/machinery/telecomms/bus/preset_two,
 /turf/open/floor/mainship,
 /area/mainship/patrol_base/telecomms)
-"rW" = (
-/obj/structure/platform/metalplatform,
-/obj/structure/platform/metalplatform{
-	dir = 4
-	},
-/turf/open/floor/mainship/mono,
-/area/mainship/arrow_of_artemis)
-"rY" = (
-/obj/structure/platform/metalplatform{
-	dir = 4
-	},
-/obj/effect/mapping_helpers/simple_pipes/scrubbers/hidden/layer1,
-/obj/effect/mapping_helpers/simple_pipes/supply/hidden/layer2,
-/turf/open/floor/plating/plating_catwalk,
-/area/mainship/arrow_of_artemis)
 "sd" = (
 /obj/structure/table/black,
 /obj/structure/window/reinforced/toughened{
@@ -1086,6 +1073,9 @@
 	dir = 4
 	},
 /obj/machinery/light/mainship,
+/obj/structure/platform/metalplatform{
+	dir = 6
+	},
 /turf/open/floor/mainship/mono,
 /area/mainship/arrow_of_artemis)
 "xt" = (
@@ -1132,15 +1122,6 @@
 /obj/machinery/telecomms/bus/preset_three,
 /turf/open/floor/mainship,
 /area/mainship/patrol_base/telecomms)
-"yZ" = (
-/obj/structure/platform/metalplatform{
-	dir = 1
-	},
-/obj/structure/platform/metalplatform{
-	dir = 8
-	},
-/turf/open/floor/mainship/mono,
-/area/mainship/arrow_of_artemis)
 "zg" = (
 /obj/structure/cargo_container/nt{
 	dir = 1
@@ -1508,6 +1489,9 @@
 /obj/structure/window/reinforced/toughened{
 	dir = 8
 	},
+/obj/structure/platform/metalplatform{
+	dir = 9
+	},
 /turf/open/floor/mainship/mono,
 /area/mainship/arrow_of_artemis)
 "FY" = (
@@ -1712,6 +1696,18 @@
 /obj/machinery/cryopod/right,
 /turf/open/floor/plating/plating_catwalk,
 /area/mainship/arrow_of_artemis)
+"Kc" = (
+/obj/structure/table/black,
+/obj/machinery/conveyor_switch{
+	pixel_x = -8;
+	pixel_y = 10
+	},
+/obj/machinery/conveyor_switch{
+	pixel_x = 8;
+	pixel_y = 10
+	},
+/turf/open/floor/mainship/mono,
+/area/mainship/arrow_of_artemis)
 "Kv" = (
 /obj/effect/turf_decal/warning_stripes/stripedsquare,
 /obj/structure/prop/catapult{
@@ -1735,6 +1731,9 @@
 	dir = 8
 	},
 /obj/machinery/light/mainship,
+/obj/structure/platform/metalplatform{
+	dir = 10
+	},
 /turf/open/floor/mainship/mono,
 /area/mainship/arrow_of_artemis)
 "Ld" = (
@@ -1874,6 +1873,9 @@
 	},
 /obj/item/clipboard,
 /obj/item/tool/pen,
+/obj/structure/platform/metalplatform{
+	dir = 5
+	},
 /turf/open/floor/mainship/mono,
 /area/mainship/arrow_of_artemis)
 "Or" = (
@@ -2012,14 +2014,6 @@
 /obj/item/storage/toolbox/electrical,
 /turf/open/floor/mainship/mono,
 /area/mainship/arrow_of_artemis)
-"Rf" = (
-/obj/structure/platform/metalplatform{
-	dir = 1
-	},
-/obj/effect/mapping_helpers/simple_pipes/scrubbers/hidden/layer1,
-/obj/effect/mapping_helpers/simple_pipes/supply/hidden/layer2,
-/turf/open/floor/mainship/mono,
-/area/mainship/arrow_of_artemis)
 "Rn" = (
 /obj/machinery/gear{
 	dir = 4
@@ -2123,23 +2117,6 @@
 /obj/effect/turf_decal/warning_stripes/box/arrow,
 /turf/open/floor/mainship_hull,
 /area/space)
-"Tk" = (
-/obj/structure/platform_decoration/metalplatform_deco{
-	dir = 8
-	},
-/obj/effect/mapping_helpers/simple_pipes/scrubbers/hidden/layer1,
-/obj/effect/mapping_helpers/simple_pipes/supply/hidden/layer2,
-/turf/open/floor/mainship/purple,
-/area/mainship/arrow_of_artemis)
-"Tq" = (
-/obj/structure/platform/metalplatform{
-	dir = 1
-	},
-/obj/structure/platform/metalplatform{
-	dir = 4
-	},
-/turf/open/floor/mainship/mono,
-/area/mainship/arrow_of_artemis)
 "Tv" = (
 /obj/structure/table/black,
 /obj/machinery/light/mainship,
@@ -2369,6 +2346,9 @@
 	},
 /obj/structure/window/reinforced/toughened{
 	dir = 4
+	},
+/obj/structure/platform/metalplatform{
+	dir = 5
 	},
 /turf/open/floor/mainship/mono,
 /area/mainship/arrow_of_artemis)
@@ -2772,9 +2752,9 @@ BW
 BW
 zj
 hT
+Fi
 iu
-iu
-iu
+hT
 ri
 BW
 Cx
@@ -2833,10 +2813,10 @@ BW
 BW
 BW
 Ay
-hT
-iu
-iu
-iu
+gE
+CQ
+Gq
+gE
 ri
 BW
 Cx
@@ -2895,10 +2875,10 @@ BW
 BW
 BW
 Ay
-hT
+gE
 iu
 iu
-iu
+gE
 ri
 BW
 Cx
@@ -2958,9 +2938,9 @@ Um
 oJ
 of
 hT
-iu
-iu
-iu
+FL
+Kc
+hT
 ri
 BW
 Cx
@@ -3020,9 +3000,9 @@ ya
 FC
 Ev
 hT
-iu
-iu
-iu
+gE
+gE
+hT
 ri
 BW
 Cx
@@ -3631,9 +3611,9 @@ mg
 iu
 Fp
 pm
-rY
 ve
-rY
+ve
+ve
 HB
 Ja
 iu
@@ -3692,12 +3672,12 @@ OY
 iV
 Os
 OD
-rW
+iu
 hp
 vi
 qZ
-Tq
-Tk
+iu
+Ja
 Df
 JF
 MU
@@ -3759,7 +3739,7 @@ Bm
 wC
 FL
 KR
-Rf
+Oa
 YY
 mt
 mt
@@ -3883,7 +3863,7 @@ Ym
 fg
 lx
 xr
-Rf
+Oa
 VM
 Rz
 Rz
@@ -3940,11 +3920,11 @@ aU
 QU
 XZ
 AM
-ba
+iu
 Oe
 lp
 bs
-yZ
+iu
 dD
 In
 RT
