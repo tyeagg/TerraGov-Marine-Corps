@@ -31,10 +31,9 @@
 
 	allowed_ammo_types = list(/obj/item/ammo_magazine/sentry)
 
-/obj/item/storage/box/sentry
+/obj/item/storage/box/crate/sentry
 	name = "\improper ST-571 sentry crate"
 	desc = "A large case containing all you need to set up an automated sentry."
-	icon = 'icons/Marine/marine-weapons.dmi'
 	icon_state = "sentry_case"
 	w_class = WEIGHT_CLASS_HUGE
 	max_w_class = WEIGHT_CLASS_HUGE
@@ -49,7 +48,7 @@
 		/obj/item/ammo_magazine/sentry,
 	)
 
-/obj/item/storage/box/sentry/Initialize(mapload)
+/obj/item/storage/box/crate/sentry/Initialize(mapload)
 	. = ..()
 	new /obj/item/weapon/gun/sentry/big_sentry(src)
 	new /obj/item/ammo_magazine/sentry(src)
@@ -184,9 +183,6 @@
 	turret_flags = TURRET_HAS_CAMERA|TURRET_IMMOBILE
 	density = FALSE
 
-/obj/item/weapon/gun/sentry/big_sentry/dropship/rebel
-	sentry_iff_signal = TGMC_REBEL_IFF
-
 /obj/item/weapon/gun/sentry/big_sentry/fob_sentry
 	max_integrity = INFINITY //Good luck killing it
 	fire_delay = 0.2 SECONDS
@@ -197,14 +193,10 @@
 	default_ammo_type = /obj/item/ammo_magazine/sentry/fob_sentry
 	allowed_ammo_types = list(/obj/item/ammo_magazine/sentry/fob_sentry)
 
-/obj/item/weapon/gun/sentry/big_sentry/fob_sentry/rebel
-	sentry_iff_signal = TGMC_REBEL_IFF
-
-/obj/item/storage/box/minisentry
+/obj/item/storage/box/crate/minisentry
 	name = "\improper ST-580 point defense sentry crate"
 	desc = "A large case containing all you need to set up an ST-580 point defense sentry."
-	icon = 'icons/Marine/marine-weapons.dmi'
-	icon_state = "sentry_case"
+	icon_state = "sentry_mini_case"
 	w_class = WEIGHT_CLASS_HUGE
 	storage_slots = 6
 	can_hold = list(
@@ -212,7 +204,7 @@
 		/obj/item/ammo_magazine/minisentry,
 	)
 
-/obj/item/storage/box/minisentry/Initialize(mapload, ...)
+/obj/item/storage/box/crate/minisentry/Initialize(mapload, ...)
 	. = ..()
 	new /obj/item/weapon/gun/sentry/mini(src)
 	new /obj/item/ammo_magazine/minisentry(src)
@@ -220,7 +212,7 @@
 
 /obj/item/weapon/gun/sentry/mini
 	name = "\improper ST-580 point defense sentry"
-	desc = "A deployable, automated turret with AI targeting capabilities. This is a lightweight portable model meant for rapid deployment and point defense. Armed with an light, high velocity machine gun and a 100-round drum magazine."
+	desc = "A deployable, automated turret with AI targeting capabilities. This is a lightweight portable model meant for rapid deployment and point defense. Armed with an light, high velocity machine gun and a 300-round drum magazine."
 	icon_state = "minisentry"
 
 	max_shells = 300

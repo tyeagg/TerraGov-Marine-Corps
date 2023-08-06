@@ -75,7 +75,7 @@
 			X.balloon_alert(X, "Cannot while buckled")
 		return FALSE
 
-	if(!(flags_to_check & XACT_USE_STAGGERED) && X.stagger)
+	if(!(flags_to_check & XACT_USE_STAGGERED) && X.IsStaggered())
 		if(!silent)
 			X.balloon_alert(X, "Cannot while staggered")
 		return FALSE
@@ -88,6 +88,11 @@
 	if(!(flags_to_check & XACT_USE_CRESTED) && X.crest_defense)
 		if(!silent)
 			X.balloon_alert(X, "Cannot while in crest defense")
+		return FALSE
+
+	if(!(flags_to_check & XACT_USE_ROOTED) && HAS_TRAIT_FROM(X, TRAIT_IMMOBILE, BOILER_ROOTED_TRAIT))
+		if(!silent)
+			X.balloon_alert(X, "Cannot while rooted")
 		return FALSE
 
 	if(!(flags_to_check & XACT_USE_NOTTURF) && !isturf(X.loc))

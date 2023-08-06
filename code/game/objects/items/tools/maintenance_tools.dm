@@ -343,6 +343,7 @@
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
 	pry_capable = IS_PRY_CAPABLE_CROWBAR
 	tool_behaviour = TOOL_CROWBAR
+	usesound = 'sound/items/crowbar.ogg'
 
 
 /obj/item/tool/crowbar/red
@@ -495,16 +496,20 @@
 
 	if(!istype(I, /obj/item/cell))
 		return
-	if(istype(I, /obj/item/cell/rtg/large))
+	if(I.w_class > WEIGHT_CLASS_NORMAL)
 		balloon_alert(user, "Too large")
 		return
 	if(!user.drop_held_item())
 		return
 
+	if(cell) //hotswapping
+		cell.update_icon()
+		user.put_in_hands(cell)
+		cell = null
+
 	I.forceMove(src)
-	cell.update_icon()
-	user.put_in_hands(cell)
 	cell = I
+	cell.update_icon()
 	balloon_alert(user, "Charge Remaining: [cell.charge]/[cell.maxcharge]")
 	playsound(user, 'sound/weapons/guns/interact/rifle_reload.ogg', 20, 1, 5)
 	icon_state = "handheldcharger_black"

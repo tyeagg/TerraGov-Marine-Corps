@@ -105,7 +105,8 @@
 
 #define STUN "stun"
 #define WEAKEN "weaken"
-#define PARALYZE "paralize"
+#define PARALYZE "paralyze"
+#define STAGGER "stagger"
 #define AGONY "agony" // Added in PAIN!
 #define STUTTER "stutter"
 #define EYE_BLUR "eye_blur"
@@ -446,7 +447,8 @@ GLOBAL_LIST_INIT(xenoupgradetiers, list(XENO_UPGRADE_BASETYPE, XENO_UPGRADE_INVA
 ///Stamina exhaustion
 
 #define LIVING_STAMINA_EXHAUSTION_COOLDOWN 10 SECONDS //Amount of time between 0 stamina exhaustion events
-#define STAMINA_EXHAUSTION_DEBUFF_STACKS 6 //Amount of slow and stagger stacks applied on stamina exhaustion events
+#define STAMINA_EXHAUSTION_STAGGER_DURATION 10 SECONDS //Amount of stagger applied on stamina exhaustion events
+#define STAMINA_EXHAUSTION_DEBUFF_STACKS 6 //Amount of slow and eyeblur stacks applied on stamina exhaustion events
 
 
 //Shock defines
@@ -464,7 +466,6 @@ GLOBAL_LIST_INIT(xenoupgradetiers, list(XENO_UPGRADE_BASETYPE, XENO_UPGRADE_INVA
 #define XENO_ACID_WELL_MAX_CHARGES 5 //Maximum number of charges for the acid well
 
 #define HIVE_CAN_HIJACK (1<<0)
-#define HIVE_CAN_COLLAPSE_FROM_SILO (1<<1)
 
 #define XENO_PULL_CHARGE_TIME 2 SECONDS
 #define XENO_SLOWDOWN_REGEN 0.4
@@ -714,7 +715,7 @@ GLOBAL_LIST_INIT(xenoupgradetiers, list(XENO_UPGRADE_BASETYPE, XENO_UPGRADE_INVA
 #define WRAITH_BANISH_NONFRIENDLY_LIVING_MULTIPLIER 0.5
 #define WRAITH_BANISH_VERY_SHORT_MULTIPLIER 0.3
 
-#define WRAITH_TELEPORT_DEBUFF_STAGGER_STACKS 2 //Stagger and slow stacks applied to adjacent living hostiles before/after a teleport
+#define WRAITH_TELEPORT_DEBUFF_STAGGER_STACKS 2 SECONDS //Stagger and slow stacks applied to adjacent living hostiles before/after a teleport
 #define WRAITH_TELEPORT_DEBUFF_SLOWDOWN_STACKS 3 //Stagger and slow stacks applied to adjacent living hostiles before/after a teleport
 
 //Warrior defines
@@ -749,11 +750,6 @@ GLOBAL_LIST_INIT(xenoupgradetiers, list(XENO_UPGRADE_BASETYPE, XENO_UPGRADE_INVA
 #define BRAVO_SQUAD "bravo_squad"
 #define CHARLIE_SQUAD "charlie_squad"
 #define DELTA_SQUAD "delta_squad"
-
-#define ALPHA_SQUAD_REBEL "alpha_squad_rebel"
-#define BRAVO_SQUAD_REBEL "bravo_squad_rebel"
-#define CHARLIE_SQUAD_REBEL "charlie_squad_rebel"
-#define DELTA_SQUAD_REBEL "delta_squad_rebel"
 
 #define ZULU_SQUAD "zulu_squad"
 #define YANKEE_SQUAD "yankee_squad"
@@ -860,3 +856,11 @@ GLOBAL_LIST_INIT(human_body_parts, list(BODY_ZONE_HEAD,
 #define BOILER_WATER_SLOWDOWN 0
 ///Slowdown for warlocks moving through liquid
 #define WARLOCK_WATER_SLOWDOWN 0
+
+
+//Species defines
+
+///Human species or those that functional behave like them. Default species
+#define SPECIES_HUMAN "species_human"
+///Combat robot species
+#define SPECIES_COMBAT_ROBOT "species_combat_robot"

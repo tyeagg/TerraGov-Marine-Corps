@@ -73,14 +73,13 @@
 	if(!z)
 		return
 	var/marker_flags
-	if(iff_signal == TGMC_LOYALIST_IFF)
-		marker_flags = MINIMAP_FLAG_MARINE
-	else if(iff_signal == TGMC_REBEL_IFF)
-		marker_flags = MINIMAP_FLAG_MARINE_REBEL
-	else if(iff_signal == SOM_IFF)
-		marker_flags = MINIMAP_FLAG_MARINE_SOM
-	else
-		marker_flags = MINIMAP_FLAG_MARINE
+	switch(iff_signal)
+		if(TGMC_LOYALIST_IFF)
+			marker_flags = MINIMAP_FLAG_MARINE
+		if(SOM_IFF)
+			marker_flags = MINIMAP_FLAG_MARINE_SOM
+		else
+			marker_flags = MINIMAP_FLAG_MARINE
 	SSminimaps.add_marker(src, marker_flags, image('icons/UI_icons/map_blips.dmi', null, "sentry[firing ? "_firing" : "_passive"]"))
 
 /obj/machinery/deployable/mounted/sentry/update_icon_state()
@@ -420,23 +419,34 @@
 ///Checks the path to the target for obstructions. Returns TRUE if the path is clear, FALSE if not.
 /obj/machinery/deployable/mounted/sentry/proc/check_target_path(mob/living/target)
 	var/list/turf/path = getline(src, target)
+	var/turf/starting_turf = get_turf(src)
+	var/turf/target_turf = path[length(path)-1]
 	path -= get_turf(src)
 	if(!length(path))
 		return FALSE
+
+	var/old_turf_dir_to_us = get_dir(starting_turf, target_turf)
+	if(ISDIAGONALDIR(old_turf_dir_to_us))
+		for(var/i in 0 to 2)
+			var/between_turf = get_step(target_turf, turn(old_turf_dir_to_us, i == 1 ? 45 : -45))
+			if(can_see_through(starting_turf, between_turf))
+				break
+			if(i==2)
+				return FALSE
 	for(var/turf/T AS in path)
 		var/obj/effect/particle_effect/smoke/smoke = locate() in T
 		if(smoke?.opacity)
 			return FALSE
 
-		if(IS_OPAQUE_TURF(T) || T.density && !(T.flags_pass & PASSPROJECTILE) && !(T.type in ignored_terrains))
+		if(IS_OPAQUE_TURF(T) || T.density && !(T.allow_pass_flags & PASS_PROJECTILE) && !(T.type in ignored_terrains))
 			return FALSE
 
 		for(var/obj/machinery/MA in T)
-			if(MA.density && !(MA.flags_pass & PASSPROJECTILE) && !(MA.type in ignored_terrains))
+			if(MA.density && !(MA.allow_pass_flags & PASS_PROJECTILE) && !(MA.type in ignored_terrains))
 				return FALSE
 
 		for(var/obj/structure/S in T)
-			if(S.density && !(S.flags_pass & PASSPROJECTILE) && !(S.type in ignored_terrains))
+			if(S.density && !(S.allow_pass_flags & PASS_PROJECTILE) && !(S.type in ignored_terrains))
 				return FALSE
 
 	return TRUE

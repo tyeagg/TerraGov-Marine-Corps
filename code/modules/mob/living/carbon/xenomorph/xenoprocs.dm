@@ -169,19 +169,6 @@
 		var/hivemind_countdown = SSticker.mode?.get_hivemind_collapse_countdown()
 		if(hivemind_countdown)
 			stat("<b>Orphan hivemind collapse timer:</b>", hivemind_countdown)
-		var/siloless_countdown = SSticker.mode?.get_siloless_collapse_countdown()
-		if(siloless_countdown)
-			stat("<b>Orphan hivemind collapse timer:</b>", siloless_countdown)
-		var/datum/game_mode/combat_patrol/sensor_capture/sensor_mode = SSticker.mode
-		var/datum/game_mode/psy_sensors/psy_mode = SSticker.mode
-		if(issensorcapturegamemode(SSticker.mode))
-			stat("<b>Activated Sensor Towers:</b>", sensor_mode.sensors_activated)
-		if(ispsysensorgamemode(SSticker.mode))
-			stat("<b>Activated Sensor Towers:</b>", psy_mode.sensors_activated)
-		//combat patrol timer
-		var/patrol_end_countdown = SSticker.mode?.game_end_countdown()
-		if(patrol_end_countdown)
-			stat("<b>Round End timer:</b>", patrol_end_countdown)
 
 //A simple handler for checking your state. Used in pretty much all the procs.
 /mob/living/carbon/xenomorph/proc/check_state()
@@ -248,8 +235,6 @@
 
 
 /mob/living/carbon/xenomorph/proc/update_evolving()
-	if(!client || !ckey) // stop evolve progress for ssd/ghosted xenos
-		return
 	if(evolution_stored >= xeno_caste.evolution_threshold || !(xeno_caste.caste_flags & CASTE_EVOLUTION_ALLOWED) || HAS_TRAIT(src, TRAIT_VALHALLA_XENO))
 		return
 	if(!hive.check_ruler() && caste_base_type != /mob/living/carbon/xenomorph/larva) // Larva can evolve without leaders at round start.
@@ -261,13 +246,12 @@
 	var/evolution_points = 1 + (FLOOR(stored_larva / 3, 1)) + hive.get_evolution_boost() + spec_evolution_boost()
 	evolution_stored = min(evolution_stored + evolution_points, xeno_caste.evolution_threshold)
 
+	if(!client || !ckey)
+		return
+
 	if(evolution_stored == xeno_caste.evolution_threshold)
 		to_chat(src, span_xenodanger("Our carapace crackles and our tendons strengthen. We are ready to evolve!"))
 		SEND_SOUND(src, sound('sound/effects/xeno_evolveready.ogg'))
-
-
-/mob/living/carbon/xenomorph/show_inv(mob/user)
-	return
 
 
 //This deals with "throwing" xenos -- ravagers, hunters, and runners in particular. Everyone else defaults to normal
@@ -282,10 +266,8 @@
 
 	if(isobj(hit_atom)) //Deal with smacking into dense objects. This overwrites normal throw code.
 		var/obj/O = hit_atom
-		if(!O.density)
-			return FALSE//Not a dense object? Doesn't matter then, pass over it.
-		if(!O.anchored)
-			step(O, dir) //Not anchored? Knock the object back a bit. Ie. canisters.
+		if(!O.anchored && !isxeno(src))
+			step(O, dir)
 		SEND_SIGNAL(src, COMSIG_XENO_OBJ_THROW_HIT, O, speed)
 		return TRUE
 
@@ -410,7 +392,7 @@
 /obj/structure/acid_spray_act(mob/living/carbon/xenomorph/X)
 	if(!is_type_in_typecache(src, GLOB.acid_spray_hit))
 		return TRUE // normal density flag
-	take_damage(X.xeno_caste.acid_spray_structure_damage, "acid", "acid")
+	take_damage(X.xeno_caste.acid_spray_structure_damage, BURN, ACID)
 	return TRUE // normal density flag
 
 /obj/structure/razorwire/acid_spray_act(mob/living/carbon/xenomorph/X)
@@ -418,7 +400,7 @@
 	return FALSE // not normal density flag
 
 /obj/vehicle/multitile/root/cm_armored/acid_spray_act(mob/living/carbon/xenomorph/X)
-	take_damage_type(X.xeno_caste.acid_spray_structure_damage, "acid", src)
+	take_damage_type(X.xeno_caste.acid_spray_structure_damage, ACID, src)
 	healthcheck()
 	return TRUE
 
@@ -445,7 +427,7 @@
 /mob/living/carbon/human/apply_acid_spray_damage(damage)
 	take_overall_damage(damage, BURN, ACID, updating_health = TRUE)
 	emote("scream")
-	Paralyze(20)
+	Paralyze(2 SECONDS)
 
 /mob/living/carbon/xenomorph/acid_spray_act(mob/living/carbon/xenomorph/X)
 	ExtinguishMob()
@@ -490,7 +472,7 @@
 	playsound(C, "alien_drool", 15, TRUE)
 	do
 		face_atom(C)
-		if(stagger)
+		if(IsStaggered())
 			return FALSE
 		do_attack_animation(C)
 		C.reagents.add_reagent(toxin, transfer_amount)
@@ -556,12 +538,12 @@
 ///Set the var tracked to to_track
 /mob/living/carbon/xenomorph/proc/set_tracked(atom/to_track)
 	if(tracked)
-		UnregisterSignal(tracked, COMSIG_PARENT_QDELETING)
+		UnregisterSignal(tracked, COMSIG_QDELETING)
 		if (tracked == to_track)
 			clean_tracked()
 			return
 	tracked = to_track
-	RegisterSignal(tracked, COMSIG_PARENT_QDELETING, PROC_REF(clean_tracked))
+	RegisterSignal(tracked, COMSIG_QDELETING, PROC_REF(clean_tracked))
 
 ///Signal handler to null tracked
 /mob/living/carbon/xenomorph/proc/clean_tracked(atom/to_track)

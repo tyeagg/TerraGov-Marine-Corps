@@ -34,11 +34,6 @@
 	update_action_button_icons()
 	update_icons(FALSE)
 
-/mob/living/carbon/xenomorph/handle_status_effects()
-	. = ..()
-	handle_stagger() // 1 each time
-	handle_slowdown() // 0.4 each time
-
 /mob/living/carbon/xenomorph/handle_fire()
 	. = ..()
 	if(.)
@@ -46,7 +41,6 @@
 			adjust_fire_stacks(-1)	//Passively lose firestacks when not on fire while resting and having firestacks built up.
 		return
 	if(!(xeno_caste.caste_flags & CASTE_FIRE_IMMUNE) && on_fire) //Sanity check; have to be on fire to actually take the damage.
-		SEND_SIGNAL(src, COMSIG_XENOMORPH_FIRE_BURNING)
 		apply_damage((fire_stacks + 3), BURN, blocked = FIRE)
 
 /mob/living/carbon/xenomorph/proc/handle_living_health_updates()

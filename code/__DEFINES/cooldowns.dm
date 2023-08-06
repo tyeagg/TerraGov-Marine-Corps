@@ -49,6 +49,7 @@
 #define COOLDOWN_ITEM_TRICK "cooldown_item_trick"
 #define COOLDOWN_RAVAGER_FLAMER_ACT "cooldown_ravager_flamer_act"
 #define COOLDOWN_DROPPOD_TARGETTING "cooldown_droppod_targetting"
+#define COOLDOWN_TRY_TTS "cooldown_try_tts"
 
 //Mecha cooldowns
 #define COOLDOWN_MECHA "mecha"
@@ -135,3 +136,8 @@
 
 //railgun cooldown define
 #define COOLDOWN_RAILGUN_FIRE 300 SECONDS
+
+//ping cooldown define
+#define COOLDOWN_AI_PING_NORMAL 45 SECONDS
+#define COOLDOWN_AI_PING_LOW 30 SECONDS
+#define COOLDOWN_AI_PING_EXTRA_LOW 15 SECONDS

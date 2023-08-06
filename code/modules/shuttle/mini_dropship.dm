@@ -42,8 +42,6 @@
 	var/origin_port_id = SHUTTLE_TADPOLE
 	/// The user of the ui
 	var/mob/living/ui_user
-	/// If this computer was damaged by a xeno
-	var/damaged = FALSE
 	/// How long before you can launch tadpole after a landing
 	var/launching_delay = 10 SECONDS
 	///Minimap for use while in landing cam mode
@@ -83,7 +81,7 @@
 		off_action.target = user
 		off_action.give_action(user)
 		actions += off_action
-	
+
 	if(tadmap)
 		tadmap.target = user
 		tadmap.give_action(user)
@@ -168,7 +166,7 @@
 
 /obj/machinery/computer/camera_advanced/shuttle_docker/minidropship/attack_alien(mob/living/carbon/xenomorph/X, damage_amount, damage_type, damage_flag, effects, armor_penetration, isrightclick)
 	. = ..()
-	if(damaged)
+	if(machine_stat & BROKEN)
 		return
 	if(X.status_flags & INCORPOREAL)
 		return
@@ -185,10 +183,11 @@
 	if(!do_after(X, 10 SECONDS, TRUE, src, BUSY_ICON_DANGER, BUSY_ICON_HOSTILE))
 		return
 	visible_message("The wiring is destroyed, nobody will be able to repair this computer!")
+	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_MINI_DROPSHIP_DESTROYED, src)
 	var/datum/effect_system/spark_spread/s2 = new /datum/effect_system/spark_spread
 	s2.set_up(3, 1, src)
 	s2.start()
-	damaged = TRUE
+	set_broken()
 	open_prompt = FALSE
 	clean_ui_user()
 
@@ -205,7 +204,7 @@
 		visible_message("Autopilot detects loss of helm control. Halting take off!")
 
 /obj/machinery/computer/camera_advanced/shuttle_docker/minidropship/can_interact(mob/user)
-	if(damaged)
+	if(machine_stat & BROKEN)
 		to_chat(user, span_warning("The [src] blinks and lets out a crackling noise. Its broken!"))
 		return
 	return ..()
@@ -221,7 +220,7 @@
 
 	if(!ui)
 		ui_user = user
-		RegisterSignal(ui_user, list(COMSIG_PARENT_QDELETING, COMSIG_MOVABLE_MOVED), PROC_REF(clean_ui_user))
+		RegisterSignals(ui_user, list(COMSIG_QDELETING, COMSIG_MOVABLE_MOVED), PROC_REF(clean_ui_user))
 		ui = new(user, src, "Minidropship", name)
 		ui.open()
 
@@ -234,7 +233,7 @@
 	SIGNAL_HANDLER
 	if(ui_user)
 		remove_eye_control(ui_user)
-		UnregisterSignal(ui_user, list(COMSIG_PARENT_QDELETING, COMSIG_MOVABLE_MOVED))
+		UnregisterSignal(ui_user, list(COMSIG_QDELETING, COMSIG_MOVABLE_MOVED))
 		ui_user = null
 
 /obj/machinery/computer/camera_advanced/shuttle_docker/minidropship/ui_data(mob/user)

@@ -17,10 +17,6 @@ map lv624
 	minplayers 25
 endmap
 
-map desertdam
-	minplayers 90
-endmap
-
 map bigred_v2
 	minplayers 25
 endmap
@@ -73,4 +69,8 @@ endmap
 
 map desparity
 	maxplayers 30
+endmap
+
+map lawanka
+minplayers 60
 endmap

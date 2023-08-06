@@ -79,18 +79,13 @@
 		..()
 		return 1
 
-/obj/machinery/computer/update_icon()
-	..()
-	icon_state = initial(icon_state)
-
-	// Broken
+/obj/machinery/computer/update_icon_state()
 	if(machine_stat & (BROKEN|DISABLED))
-		icon_state += "b"
-
-	// Powered
+		icon_state = "[initial(icon_state)]b"
 	else if(machine_stat & NOPOWER)
+		icon_state = "[initial(icon_state)]0"
+	else
 		icon_state = initial(icon_state)
-		icon_state += "0"
 
 /obj/machinery/computer/proc/set_broken()
 	machine_stat |= BROKEN
@@ -213,4 +208,4 @@
 
 	X.do_attack_animation(src, ATTACK_EFFECT_DISARM2) //SFX
 	playsound(loc, pick('sound/effects/bang.ogg','sound/effects/metal_crash.ogg','sound/effects/meteorimpact.ogg'), 25, 1) //SFX
-	Shake(4, 4, 2 SECONDS)
+	Shake(duration = 0.5 SECONDS)

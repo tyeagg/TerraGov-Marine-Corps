@@ -581,10 +581,10 @@ inaccurate. Don't worry if force is ever negative, it won't runtime.
 	attachment_action_type = /datum/action/item_action/toggle
 	activation_sound = 'sound/items/flashlight.ogg'
 
-/obj/item/attachable/flashlight/activate(mob/living/user)
-	turn_light(user, !light_on)
+/obj/item/attachable/flashlight/activate(mob/living/user, turn_off)
+	turn_light(user, turn_off ? !turn_off : !light_on)
 
-/obj/item/attachable/flashlight/turn_light(mob/user, toggle_on)
+/obj/item/attachable/flashlight/turn_light(mob/user, toggle_on, cooldown, sparks, forced, light_again)
 	. = ..()
 
 	if(. != CHECKS_PASSED)
@@ -748,7 +748,7 @@ inaccurate. Don't worry if force is ever negative, it won't runtime.
 	desc = "An unremovable set of long range ironsights for an HMG-08 machinegun."
 	icon_state = "sniperscope_invisible"
 	zoom_viewsize = 0
-	zoom_tile_offset = 3
+	zoom_tile_offset = 5
 
 /obj/item/attachable/scope/unremovable/mmg
 	name = "MG-27 rail scope"
@@ -773,7 +773,7 @@ inaccurate. Don't worry if force is ever negative, it won't runtime.
 	desc = "An unremovable smart sight built for use with the tl102, it does nearly all the aiming work for the gun's integrated IFF systems."
 	icon_state = "sniperscope_invisible"
 	zoom_viewsize = 0
-	zoom_tile_offset = 3
+	zoom_tile_offset = 5
 	deployed_scope_rezoom = TRUE
 
 //all mounted guns with a nest use this
@@ -812,10 +812,10 @@ inaccurate. Don't worry if force is ever negative, it won't runtime.
 		user.add_movespeed_modifier(MOVESPEED_ID_SCOPE_SLOWDOWN, TRUE, 0, NONE, TRUE, zoom_slowdown)
 		RegisterSignal(user, COMSIG_CARBON_SWAPPED_HANDS, PROC_REF(zoom_item_turnoff))
 	else
-		RegisterSignal(user, list(COMSIG_MOVABLE_MOVED, COMSIG_CARBON_SWAPPED_HANDS), PROC_REF(zoom_item_turnoff))
-	if(!(master_gun.flags_gun_features & IS_DEPLOYED))
+		RegisterSignals(user, list(COMSIG_MOVABLE_MOVED, COMSIG_CARBON_SWAPPED_HANDS), PROC_REF(zoom_item_turnoff))
+	if(!CHECK_BITFIELD(master_gun.flags_item, IS_DEPLOYED))
 		RegisterSignal(user, COMSIG_MOB_FACE_DIR, PROC_REF(change_zoom_offset))
-	RegisterSignal(master_gun, list(COMSIG_ITEM_EQUIPPED, COMSIG_ITEM_UNWIELD, COMSIG_ITEM_DROPPED), PROC_REF(zoom_item_turnoff))
+	RegisterSignals(master_gun, list(COMSIG_ITEM_EQUIPPED, COMSIG_ITEM_UNWIELD, COMSIG_ITEM_DROPPED), PROC_REF(zoom_item_turnoff))
 	master_gun.accuracy_mult += scoped_accuracy_mod
 	if(has_nightvision)
 		update_remote_sight(user)
@@ -1334,7 +1334,7 @@ inaccurate. Don't worry if force is ever negative, it won't runtime.
 	melee_mod = 5
 	size_mod = 1
 	icon_state = "v34stock"
-	accuracy_mod = 0.3
+	accuracy_mod = 0.2
 	recoil_mod = -2
 	scatter_mod = -8
 
@@ -1370,7 +1370,6 @@ inaccurate. Don't worry if force is ever negative, it won't runtime.
 	icon_state = "bipod"
 	slot = ATTACHMENT_SLOT_UNDER
 	size_mod = 2
-	melee_mod = -10
 	deploy_time = 1 SECONDS
 	accuracy_mod = 0.3
 	recoil_mod = -2
@@ -1393,7 +1392,7 @@ inaccurate. Don't worry if force is ever negative, it won't runtime.
 		return
 
 	if(user)
-		RegisterSignal(master_gun, list(COMSIG_ITEM_DROPPED, COMSIG_ITEM_EQUIPPED, COMSIG_ITEM_UNWIELD), PROC_REF(retract_bipod))
+		RegisterSignals(master_gun, list(COMSIG_ITEM_DROPPED, COMSIG_ITEM_EQUIPPED, COMSIG_ITEM_UNWIELD), PROC_REF(retract_bipod))
 		RegisterSignal(user, COMSIG_MOVABLE_MOVED, PROC_REF(retract_bipod))
 		to_chat(user, span_notice("You deploy [src]."))
 
@@ -1447,14 +1446,14 @@ inaccurate. Don't worry if force is ever negative, it won't runtime.
 			/obj/structure/window/framed/prison,
 		)
 	master_gun.turret_flags |= TURRET_HAS_CAMERA|TURRET_SAFETY|TURRET_ALERTS
-	master_gun.AddElement(/datum/element/deployable_item, master_gun.deployable_item, deploy_time, undeploy_time)
+	master_gun.AddComponent(/datum/component/deployable_item, master_gun.deployable_item, deploy_time, undeploy_time)
 	update_icon()
 
 /obj/item/attachable/buildasentry/on_detach(detaching_item, mob/user)
 	. = ..()
 	var/obj/item/weapon/gun/detaching_gun = detaching_item
 	DISABLE_BITFIELD(detaching_gun.flags_item, IS_DEPLOYABLE)
-	detaching_gun.RemoveElement(/datum/element/deployable_item, detaching_gun.deployable_item, deploy_time, undeploy_time)
+	qdel(detaching_gun.GetComponent(/datum/component/deployable_item))
 	detaching_gun.ignored_terrains = null
 	detaching_gun.deployable_item = null
 	detaching_gun.turret_flags &= ~(TURRET_HAS_CAMERA|TURRET_SAFETY|TURRET_ALERTS)
@@ -1521,7 +1520,7 @@ inaccurate. Don't worry if force is ever negative, it won't runtime.
 	master_gun.set_gun_user(null)
 	RegisterSignal(attaching_item, COMSIG_ITEM_EQUIPPED, PROC_REF(handle_activations))
 	RegisterSignal(attaching_item, COMSIG_ATOM_ATTACK_HAND_ALTERNATE, PROC_REF(switch_mode))
-	RegisterSignal(attaching_item, COMSIG_PARENT_ATTACKBY_ALTERNATE, PROC_REF(reload_gun))
+	RegisterSignal(attaching_item, COMSIG_ATOM_ATTACKBY_ALTERNATE, PROC_REF(reload_gun))
 	RegisterSignal(master_gun, COMSIG_MOB_GUN_FIRED, PROC_REF(after_fire))
 	master_gun.base_gun_icon = master_gun.placed_overlay_iconstate
 	master_gun.update_icon()
@@ -1539,7 +1538,7 @@ inaccurate. Don't worry if force is ever negative, it won't runtime.
 	update_icon(user)
 	master_gun.base_gun_icon = initial(master_gun.icon_state)
 	master_gun.update_icon()
-	UnregisterSignal(detaching_item, list(COMSIG_ITEM_EQUIPPED, COMSIG_ATOM_ATTACK_HAND_ALTERNATE, COMSIG_PARENT_ATTACKBY_ALTERNATE))
+	UnregisterSignal(detaching_item, list(COMSIG_ITEM_EQUIPPED, COMSIG_ATOM_ATTACK_HAND_ALTERNATE, COMSIG_ATOM_ATTACKBY_ALTERNATE))
 	UnregisterSignal(master_gun, COMSIG_MOB_GUN_FIRED)
 	UnregisterSignal(user, COMSIG_MOB_MOUSEDOWN)
 
@@ -1710,7 +1709,7 @@ inaccurate. Don't worry if force is ever negative, it won't runtime.
 	master_gun = attached_to
 	master_gun.wield_delay					+= wield_delay_mod
 	if(gun_user)
-		UnregisterSignal(gun_user, list(COMSIG_MOB_MOUSEDOWN, COMSIG_MOB_MOUSEUP, COMSIG_ITEM_ZOOM, COMSIG_ITEM_UNZOOM, COMSIG_MOB_MOUSEDRAG, COMSIG_KB_RAILATTACHMENT, COMSIG_KB_UNDERRAILATTACHMENT, COMSIG_KB_UNLOADGUN, COMSIG_KB_FIREMODE, COMSIG_KB_GUN_SAFETY, COMSIG_KB_AUTOEJECT, COMSIG_KB_UNIQUEACTION, COMSIG_PARENT_QDELETING,  COMSIG_MOB_CLICK_RIGHT))
+		UnregisterSignal(gun_user, list(COMSIG_MOB_MOUSEDOWN, COMSIG_MOB_MOUSEUP, COMSIG_ITEM_ZOOM, COMSIG_ITEM_UNZOOM, COMSIG_MOB_MOUSEDRAG, COMSIG_KB_RAILATTACHMENT, COMSIG_KB_UNDERRAILATTACHMENT, COMSIG_KB_UNLOADGUN, COMSIG_KB_FIREMODE, COMSIG_KB_GUN_SAFETY, COMSIG_KB_AUTOEJECT, COMSIG_KB_UNIQUEACTION, COMSIG_QDELETING,  COMSIG_MOB_CLICK_RIGHT))
 	var/datum/action/item_action/toggle/new_action = new /datum/action/item_action/toggle(src, master_gun)
 	if(!isliving(user))
 		return
@@ -1722,6 +1721,7 @@ inaccurate. Don't worry if force is ever negative, it won't runtime.
 	new_action.set_toggle(TRUE)
 	new_action.update_button_icon()
 	update_icon(user)
+	RegisterSignal(master_gun, COMSIG_ITEM_REMOVED_INVENTORY, TYPE_PROC_REF(/obj/item/weapon/gun, drop_connected_mag))
 
 ///This is called when an attachment gun (src) detaches from a gun.
 /obj/item/weapon/gun/proc/on_detach(obj/item/attached_to, mob/user)
@@ -1736,6 +1736,7 @@ inaccurate. Don't worry if force is ever negative, it won't runtime.
 	if(master_gun.active_attachable == src)
 		master_gun.active_attachable = null
 	master_gun.wield_delay					-= wield_delay_mod
+	UnregisterSignal(master_gun, COMSIG_ITEM_REMOVED_INVENTORY)
 	master_gun = null
 	attached_to:gunattachment = null
 	update_icon(user)
@@ -1766,8 +1767,8 @@ inaccurate. Don't worry if force is ever negative, it won't runtime.
 	return TRUE
 
 ///Called when an attachment is attached to this gun (src).
-/obj/item/weapon/gun/proc/on_attachment_attach(/obj/item/attaching_here, mob/attacher)
+/obj/item/weapon/gun/proc/on_attachment_attach(obj/item/attaching_here, mob/attacher)
 	return
 ///Called when an attachment is detached from this gun (src).
-/obj/item/weapon/gun/proc/on_attachment_detach(/obj/item/detaching_here, mob/attacher)
+/obj/item/weapon/gun/proc/on_attachment_detach(obj/item/detaching_here, mob/attacher)
 	return

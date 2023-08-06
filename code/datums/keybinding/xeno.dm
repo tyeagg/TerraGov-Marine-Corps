@@ -200,14 +200,14 @@
 /datum/keybinding/xeno/long_range_sight
 	name = "long_range_sight"
 	full_name = "Boiler: Long Range Sight"
-	description = ""
+	description = "Toggles the zoom in."
 	keybind_signal = COMSIG_XENOABILITY_LONG_RANGE_SIGHT
 	hotkey_keys = list("E")
 
 /datum/keybinding/xeno/toggle_bomb
 	name = "toggle_bomb"
 	full_name = "Boiler: Toggle Bombard Type"
-	description = ""
+	description = "Toggles the type of glob ."
 	keybind_signal = COMSIG_XENOABILITY_TOGGLE_BOMB
 
 /datum/keybinding/xeno/toggle_bomb_radial
@@ -220,14 +220,21 @@
 /datum/keybinding/xeno/create_bomb
 	name = "create_bomb"
 	full_name = "Boiler: Create Bombard Ammo"
-	description = ""
+	description = "Create new globs to fire."
 	keybind_signal = COMSIG_XENOABILITY_CREATE_BOMB
 	hotkey_keys = list("F")
+
+/datum/keybinding/xeno/root
+	name = "root"
+	full_name = "Boiler: Root in place"
+	description = "Begin rooting in place."
+	keybind_signal = COMSIG_XENOABILITY_ROOT
+	hotkey_keys = list("C")
 
 /datum/keybinding/xeno/bombard
 	name = "bombard"
 	full_name = "Boiler: Bombard"
-	description = ""
+	description = "Fire globules."
 	keybind_signal = COMSIG_XENOABILITY_BOMBARD
 	hotkey_keys = list("R")
 
@@ -459,9 +466,16 @@
 /datum/keybinding/xeno/change_form
 	name = "change_form"
 	full_name = "Hivemind: Change Form"
-	description = ""
+	description = "Change form to/from incorporeal."
 	keybind_signal = COMSIG_XENOMORPH_HIVEMIND_CHANGE_FORM
 	hotkey_keys = list("F")
+
+/datum/keybinding/xeno/change_form
+	name = "change_form"
+	full_name = "Hivemind: Open teleportation minimap"
+	description = "Opens up the minimap which, when you click somewhere, tries to teleport you to the selected location"
+	keybind_signal = COMISG_XENOMORPH_HIVEMIND_TELEPORT
+	hotkey_keys = list("C")
 
 /datum/keybinding/xeno/toggle_stealth
 	name = "toggle_stealth"
@@ -544,11 +558,11 @@
 	hotkey_keys = list("F")
 
 
-/datum/keybinding/xeno/gravity_grenade
+/datum/keybinding/xeno/psychic_storm
 	name = "gravnade"
-	full_name = "Shrike: Gravity Grenade"
+	full_name = "Shrike: Psychic Vortex"
 	description = ""
-	keybind_signal = COMSIG_XENOABILITY_GRAV_NADE
+	keybind_signal = COMSIG_XENOABILITY_PSYCHIC_VORTEX
 	hotkey_keys = list("X")
 
 /datum/keybinding/xeno/screech
@@ -586,6 +600,12 @@
 	full_name = "Queen: Hive Message"
 	description = "Instantly displays a bolded announcement to all xenos in the hive."
 	keybind_signal = COMSIG_XENOABILITY_QUEEN_HIVE_MESSAGE
+
+/datum/keybinding/xeno/queen_bulwark
+	name = "queen_bulwark"
+	full_name = "Queen: Bulwark"
+	description = "Forms an area around you that reduces damage taken by friendly xenomorphs."
+	keybind_signal = COMSIG_XENOABILITY_QUEEN_BULWARK
 
 /datum/keybinding/xeno/deevolve
 	name = "deevolve"
