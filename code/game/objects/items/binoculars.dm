@@ -139,7 +139,7 @@
 	. = ..()
 	if(!length(linked_mortars))
 		return
-	if(length(linked_mortars) == 1) 
+	if(length(linked_mortars) == 1)
 		to_chat(user, span_notice("There is only one linked piece, you can't switch to another."))
 	selected_mortar += 1
 	check_mortar_index()
@@ -609,7 +609,6 @@
 		strafed = strafelist[1]
 		strafelist -= strafed
 		strafed.ex_act(EXPLODE_HEAVY)
-		new /obj/effect/particle_effect/expl_particles(strafed)
 		new /obj/effect/temp_visual/heavyimpact(strafed)
 		for(var/atom/movable/AM AS in strafed)
 			AM.ex_act(EXPLODE_HEAVY)

@@ -176,17 +176,17 @@
 	else
 		SSminimaps.add_marker(src, MINIMAP_FLAG_ALL, image('icons/UI_icons/map_blips.dmi', null, "relay_[towerid][current_timer ? "_on" : "_off"]"))
 
-/obj/structure/sensor_tower_patrol/psy
+/obj/structure/sensor_tower/psy
 	icon_state = "psy"
 	faction = FACTION_XENO
 	deactivate_time = 5 SECONDS
 	var/obj/effect/landmark/patrol_point/exit_point = /obj/effect/landmark/patrol_point
 	max_integrity = 1000
 
-/obj/structure/sensor_tower_patrol/psy/welder_act(mob/living/user, obj/item/I)
+/obj/structure/sensor_tower/psy/welder_act(mob/living/user, obj/item/I)
 	return welder_repair_act(user, I, 200, 2 SECONDS, fuel_req = 1)
 
-/obj/structure/sensor_tower_patrol/psy/ex_act(severity)
+/obj/structure/sensor_tower/psy/ex_act(severity)
 	switch(severity)
 		if(EXPLODE_DEVASTATE)
 			take_damage(100)
@@ -195,12 +195,12 @@
 		if(EXPLODE_LIGHT)
 			take_damage(10)
 
-/obj/structure/sensor_tower_patrol/psy/obj_destruction()
+/obj/structure/sensor_tower/psy/obj_destruction()
 	deactivate()
 	obj_integrity = max_integrity
 	return
 
-/obj/structure/sensor_tower_patrol/psy/begin_activation()
+/obj/structure/sensor_tower/psy/begin_activation()
 	. = ..()
 	exit_point = new exit_point(loc)
 	exit_point.id = 5
@@ -209,11 +209,11 @@
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_PSY_INHIBITOR, src)
 	new /obj/effect/ai_node/goal(loc)
 
-/obj/structure/sensor_tower_patrol/finish_activation()
+/obj/structure/sensor_tower/finish_activation()
 	. = ..()
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_PSY_INHIBITOR_ON, src)
 
-/obj/structure/sensor_tower_patrol/psy/deactivate()
+/obj/structure/sensor_tower/psy/deactivate()
 	. = ..()
 	DISABLE_BITFIELD(resistance_flags, XENO_DAMAGEABLE)
 	ENABLE_BITFIELD(resistance_flags, RESIST_ALL)

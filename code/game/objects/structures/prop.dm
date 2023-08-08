@@ -2087,5 +2087,22 @@
 	icon = 'icons/obj/structures/comm_tower.dmi'
 	icon_state = "comm_tower"
 
+/obj/structure/prop/traffic_light_train
+	name = "Traffic light"
+	icon = 'icons/obj/structures/traffic_light.dmi'
+	icon_state = "traffic_train"
+
+/obj/structure/prop/mainship/errorprop
+	name = "ERROR"
+	desc = "If you see this object in game you should ahelp, something has broken."
+	icon = 'icons/Marine/mainship_props.dmi'
+	icon_state = "error"
+
+/obj/structure/prop/monorail_train
+	name = "Monorail"
+	icon = 'icons/obj/structures/train.dmi'
+	icon_state = "monorail"
+	bound_width = 96
+
 #undef VENDOR_BROKEN
 #undef VENDOR_BLANK

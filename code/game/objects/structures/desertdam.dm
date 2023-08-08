@@ -19,7 +19,9 @@
 /obj/structure/desertdam/decals/road
 	name = "road"
 	icon_state = "road"
-	layer = LOW_OBJ_LAYER
+	plane = FLOOR_PLANE
+	layer = ABOVE_TURF_LAYER
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 /obj/structure/desertdam/decals/road/edge
 	icon_state = "edge"

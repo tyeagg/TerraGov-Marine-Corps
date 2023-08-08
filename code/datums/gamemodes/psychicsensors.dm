@@ -45,7 +45,7 @@
 /datum/game_mode/psy_sensors/post_setup()
 	. = ..()
 	for(var/turf/T AS in GLOB.psy_towers)
-		new /obj/structure/sensor_tower_patrol/psy(T)
+		new /obj/structure/sensor_tower/psy(T)
 	for(var/turf/T AS in GLOB.spawner_cave_drone)
 		new /obj/structure/spawner_cave(T)
 	for(var/turf/T AS in GLOB.spawner_cave_runner)
