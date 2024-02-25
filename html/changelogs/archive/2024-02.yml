@@ -423,3 +423,7 @@
   ivanmixo:
   - rscadd: Added directional attacks, you can enable them in the preference menu
       for all living mobs.
+2024-02-25:
+  TiviPlus:
+  - rscadd: added some admin-only vehicles
+  - code_imp: added multitile, multicrew vehicle support
